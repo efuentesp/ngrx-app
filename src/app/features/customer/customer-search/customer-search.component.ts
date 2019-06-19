@@ -1,4 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
+
+import * as fromRoot from "../../../store/reducers";
+import * as cutomerActions from "../../../store/actions/customer.actions";
 
 @Component({
   selector: "app-customer-search",
@@ -6,7 +10,9 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./customer-search.component.scss"]
 })
 export class CustomerSearchComponent implements OnInit {
-  constructor() {}
+  constructor(private store: Store<fromRoot.State>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(new cutomerActions.FindAllCustomer());
+  }
 }
