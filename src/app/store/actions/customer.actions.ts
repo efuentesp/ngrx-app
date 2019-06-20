@@ -3,16 +3,25 @@ import { Customer } from "src/app/features/customer/models/customer.model";
 
 export enum CustomerActionTypes {
   FindAllCustomer = "[Customer] Find All Customers",
-  FindAllCustomerFinished = "[Customer] Find All Customers finished"
+  FindAllCustomerSuccess = "[Customer] Find All Customers finished succesfully",
+  FindAllCustomerError = "[Customer] Find All Customers finished with error"
 }
 
 export class FindAllCustomer implements Action {
   readonly type = CustomerActionTypes.FindAllCustomer;
 }
 
-export class FindAllCustomerFinished implements Action {
-  readonly type = CustomerActionTypes.FindAllCustomerFinished;
+export class FindAllCustomerSuccess implements Action {
+  readonly type = CustomerActionTypes.FindAllCustomerSuccess;
   constructor(public payload: Customer[]) {}
 }
 
-export type CustomerActions = FindAllCustomer | FindAllCustomerFinished;
+export class FindAllCustomerError implements Action {
+  readonly type = CustomerActionTypes.FindAllCustomerError;
+  constructor(public payload: any) {}
+}
+
+export type CustomerActions =
+  | FindAllCustomer
+  | FindAllCustomerSuccess
+  | FindAllCustomerError;

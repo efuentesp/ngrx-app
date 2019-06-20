@@ -1,6 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientModule } from "@angular/common/http";
 
 import { ClarityModule } from "@clr/angular";
 
@@ -18,6 +19,7 @@ import { FeaturesModule } from "./features/features.module";
 
 import { reducers, metaReducers } from "./store/reducers";
 import { AppEffects } from "./store/effects/app.effects";
+import { CustomerEffects } from "./store/effects/customer.effects";
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,11 +28,12 @@ import { AppEffects } from "./store/effects/app.effects";
     AppRoutingModule,
     ClarityModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     UiModule,
     FeaturesModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects, CustomerEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
