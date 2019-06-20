@@ -6,7 +6,8 @@ export const environment = {
   production: false,
 
   // Json Server
-  apiUrl: "http://localhost:3000/api/v1"
+  apiUrl: "http://localhost:3000"
+  //apiUrl: "http://localhost:3000/api/v1"
   //apiUrl: 'http://172.16.68.31:5000/api/v1',
 
   // Java

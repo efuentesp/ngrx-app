@@ -15,7 +15,7 @@ export class CustomerService {
 
   findAll(query: string): Observable<Customer[]> {
     const url = environment.apiUrl;
-    const queryUrl = `${url}${query}`;
+    const queryUrl = `${url}${query}/customer`;
 
     return this.http.get<Customer[]>(queryUrl);
   }
