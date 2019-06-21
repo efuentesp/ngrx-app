@@ -9,17 +9,17 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 
-import { environment } from "../environments/environment";
+import { environment } from "src/environments/environment";
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
+import { AppRoutingModule } from "src/app/app-routing.module";
+import { AppComponent } from "src/app/app.component";
 
-import { UiModule } from "./ui/ui.module";
-import { FeaturesModule } from "./features/features.module";
+import { UiModule } from "src/app/ui/ui.module";
+import { FeaturesModule } from "src/app/features/features.module";
 
-import { reducers, metaReducers } from "./store/reducers";
-import { AppEffects } from "./store/effects/app.effects";
-import { CustomerEffects } from "./store/effects/customer.effects";
+//import { reducers, metaReducers } from "src/app/store/reducers";
+import { AppEffects } from "src/app/store/effects/app.effects";
+//import { CustomerEffects } from "src/app/store/effects/customer.effects";
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,9 +31,10 @@ import { CustomerEffects } from "./store/effects/customer.effects";
     HttpClientModule,
     UiModule,
     FeaturesModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AppEffects, CustomerEffects])
+    //StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([AppEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

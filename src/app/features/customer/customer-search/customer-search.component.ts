@@ -1,8 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
+import { Observable } from "rxjs";
 
-import * as fromRoot from "../../../store/reducers";
-import * as cutomerActions from "../../../store/actions/customer.actions";
+import * as cutomerActions from "../store/customer.actions";
+
+import { Customer } from "../models/customer.model";
+import { CustomerState } from "../store/customer.reducer";
 
 @Component({
   selector: "app-customer-search",
@@ -10,9 +13,15 @@ import * as cutomerActions from "../../../store/actions/customer.actions";
   styleUrls: ["./customer-search.component.scss"]
 })
 export class CustomerSearchComponent implements OnInit {
-  constructor(private store: Store<fromRoot.State>) {}
+  customerList: Customer[];
+
+  constructor(private store: Store<{ customerList: Customer[] }>) {}
 
   ngOnInit() {
     this.store.dispatch(new cutomerActions.FindAllCustomer());
+
+    this.store
+      .select<any>((state: any) => state.customerFeature) // no strings here
+      .subscribe((customerState: CustomerState) => console.log(customerState));
   }
 }

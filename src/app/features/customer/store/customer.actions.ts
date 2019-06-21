@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { Customer } from "src/app/features/customer/models/customer.model";
+import { Customer } from "../models/customer.model";
 
 export enum CustomerActionTypes {
   FindAllCustomer = "[Customer] Find All Customers",

@@ -1,23 +1,23 @@
-import { Customer } from "../../features/customer/models/customer.model";
+import { Customer } from "../models/customer.model";
 
-import * as customerActions from "../actions/customer.actions";
+import * as customerActions from "./customer.actions";
 
-export interface State {
+export interface CustomerState {
   loading: boolean;
   error: any;
   customerList: Customer[];
 }
 
-export const initialState: State = {
+export const initialState: CustomerState = {
   loading: false,
   error: null,
   customerList: []
 };
 
-export function reducer(
+export function customerReducer(
   state = initialState,
   action: customerActions.CustomerActions
-): State {
+): CustomerState {
   switch (action.type) {
     case customerActions.CustomerActionTypes.FindAllCustomer:
       return {

@@ -3,9 +3,9 @@ import { Actions, Effect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
 import { map, mergeMap, switchMap, catchError } from "rxjs/operators";
 
-import { Customer } from "src/app/features/customer/models/customer.model";
-import * as CustomerActions from "src/app/store/actions/customer.actions";
-import { CustomerService } from "src/app/features/customer/services/customer.service";
+import { Customer } from "../models/customer.model";
+import * as CustomerActions from "./customer.actions";
+import { CustomerService } from "../services/customer.service";
 
 @Injectable()
 export class CustomerEffects {
