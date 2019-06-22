@@ -1,1 +1,42 @@
-<app-page title="Create Customer"></app-page>
+<app-page title="Create Customer">
+  <form
+    clrForm
+    clrLayout="vertical"
+    [formGroup]="formCreateCustomer"
+    (ngSubmit)="submit()"
+  >
+    <div class="card">
+      <div class="card-block">
+        <clr-input-container>
+          <label class="clr-col-12 clr-col-md-4">ID</label>
+          <input
+            class="clr-col-12 clr-col-md-8"
+            clrInput
+            formControlName="id"
+            type="text"
+          />
+          <clr-control-error *clrIfError="required"
+            >ID Required</clr-control-error
+          >
+        </clr-input-container>
+
+        <clr-input-container>
+          <label class="clr-col-12 clr-col-md-4">Name</label>
+          <input
+            class="clr-col-12 clr-col-md-8"
+            clrInput
+            formControlName="name"
+            type="text"
+          />
+          <clr-control-error *clrIfError="required"
+            >Name Required</clr-control-error
+          >
+        </clr-input-container>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn" type="button" (click)="resetForm()">Reset</button>
+      </div>
+    </div>
+  </form>
+</app-page>

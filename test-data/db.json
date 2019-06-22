@@ -1,6 +1,6 @@
 {
   "customer": [
-    { "id": "1", "name": "cliente 1" },
-    { "id": "2", "name": "cliente 2" }
+    { "id": "C-001", "name": "cliente 1" },
+    { "id": "C-002", "name": "cliente 2" }
   ]
 }
