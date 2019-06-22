@@ -23,6 +23,7 @@
     "@clr/icons": "2.0.1",
     "@clr/ui": "2.0.1",
     "@ngrx/effects": "^8.0.1",
+    "@ngrx/entity": "^8.0.1",
     "@ngrx/store": "^8.0.1",
     "@ngrx/store-devtools": "^8.0.1",
     "@webcomponents/custom-elements": "^1.0.0",

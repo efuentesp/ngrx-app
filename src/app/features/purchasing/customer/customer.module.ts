@@ -8,7 +8,7 @@ import { CustomerRoutingModule } from "./customer-routing.module";
 import { CustomerSearchComponent } from "./containers/customer-search/customer-search.component";
 import { CustomerCreateComponent } from "./containers/customer-create/customer-create.component";
 
-import { CustomerService } from "./services/customer.service";
+import { CustomerService } from "./customer.service";
 
 @NgModule({
   declarations: [CustomerSearchComponent, CustomerCreateComponent],

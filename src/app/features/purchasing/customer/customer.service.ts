@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 
-import { environment } from "../../../../environments/environment";
+import { environment } from "src/environments/environment";
 
-import { Customer } from "../models/customer.model";
+import { Customer } from "./customer.model";
 
 @Injectable({
   providedIn: "root"
