@@ -3,8 +3,6 @@ import { NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
 
-import { ClarityModule } from "@clr/angular";
-
 import { AppRoutingModule } from "src/app/app-routing.module";
 import { AppComponent } from "src/app/app.component";
 
@@ -18,7 +16,6 @@ import { RootStoreModule } from "./root-store";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ClarityModule,
     BrowserAnimationsModule,
     HttpClientModule,
     UiModule,

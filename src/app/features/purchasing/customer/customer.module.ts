@@ -9,9 +9,14 @@ import { CustomerSearchComponent } from "./containers/customer-search/customer-s
 import { CustomerCreateComponent } from "./containers/customer-create/customer-create.component";
 
 import { CustomerService } from "./customer.service";
+import { PageComponent } from "src/app/ui/dashboard/page/page.component";
 
 @NgModule({
-  declarations: [CustomerSearchComponent, CustomerCreateComponent],
+  declarations: [
+    CustomerSearchComponent,
+    CustomerCreateComponent,
+    PageComponent
+  ],
   imports: [CommonModule, CustomerRoutingModule, ClarityModule],
   providers: [CustomerService]
 })
