@@ -1,6 +1,20 @@
 {
   "customer": [
-    { "id": "C-001", "name": "cliente 1" },
-    { "id": "C-002", "name": "cliente 2" }
+    {
+      "id": "C-001",
+      "name": "cliente 1"
+    },
+    {
+      "id": "C-002",
+      "name": "cliente 2"
+    },
+    {
+      "payload": {
+        "id": "C-003",
+        "name": "Cliente 3"
+      },
+      "type": "[Customer] Create new Customer request",
+      "id": "hYMfJwh"
+    }
   ]
 }

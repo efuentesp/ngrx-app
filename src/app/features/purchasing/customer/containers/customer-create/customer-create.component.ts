@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
+import { Store } from "@ngrx/store";
+
+import { RootStoreState, CustomerStoreActions } from "src/app/root-store";
+
 @Component({
   selector: "app-customer-create",
   templateUrl: "./customer-create.component.html",
@@ -9,7 +13,10 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class CustomerCreateComponent implements OnInit {
   formCreateCustomer: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private store$: Store<RootStoreState.State>
+  ) {
     this.formCreateCustomer = this.formBuilder.group({
       id: ["", [Validators.required]],
       name: ["", Validators.required]
@@ -21,6 +28,9 @@ export class CustomerCreateComponent implements OnInit {
   submit() {
     if (this.formCreateCustomer.valid) {
       console.log(this.formCreateCustomer.value);
+      this.store$.dispatch(
+        new CustomerStoreActions.CreateNewRequest(this.formCreateCustomer.value)
+      );
     } else {
       console.log("Invalid form!");
       this.formCreateCustomer.markAsTouched();

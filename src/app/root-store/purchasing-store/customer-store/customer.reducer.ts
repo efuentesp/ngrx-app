@@ -24,6 +24,70 @@ export function customerReducer(
         isLoading: false,
         error: action.payload
       };
+
+    case CustomerActionTypes.CreateNewRequest:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case CustomerActionTypes.CreateNewSuccess:
+      return customerAdapter.addOne(action.payload, {
+        ...state,
+        isLoading: false,
+        error: null
+      });
+    case CustomerActionTypes.CreateNewFailure:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
+    case CustomerActionTypes.UpdateRequest:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case CustomerActionTypes.UpdateSuccess:
+      return customerAdapter.updateOne(
+        {
+          id: action.payload.id,
+          changes: action.payload.newCustomerValues
+        },
+        {
+          ...state,
+          isLoading: false,
+          error: null
+        }
+      );
+    case CustomerActionTypes.UpdateFailure:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
+    case CustomerActionTypes.DeleteRequest:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case CustomerActionTypes.DeleteSuccess:
+      return customerAdapter.removeOne(action.payload.id, {
+        ...state,
+        isLoading: false,
+        error: null
+      });
+    case CustomerActionTypes.DeleteFailure:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
     default:
       return state;
   }
