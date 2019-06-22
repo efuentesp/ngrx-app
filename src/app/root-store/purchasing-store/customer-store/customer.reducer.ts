@@ -1,5 +1,3 @@
-import { Customer } from "src/app/features/purchasing/customer/customer.model";
-
 import { customerAdapter, initialState, CustomerState } from "./customer.state";
 import { CustomerActions, CustomerActionTypes } from "./customer.actions";
 

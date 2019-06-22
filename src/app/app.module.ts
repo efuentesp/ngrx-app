@@ -6,7 +6,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "src/app/app-routing.module";
 import { AppComponent } from "src/app/app.component";
 
-import { UiModule } from "src/app/ui/ui.module";
+import { DashboardModule } from "src/app/ui/dashboard/dashboard.module";
+
 import { PurchasingModule } from "src/app/features/purchasing/purchasing.module";
 
 import { RootStoreModule } from "./root-store";
@@ -18,7 +19,7 @@ import { RootStoreModule } from "./root-store";
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    UiModule,
+    DashboardModule,
     RootStoreModule,
     PurchasingModule
   ],

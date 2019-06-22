@@ -5,19 +5,21 @@ import { ClarityModule } from "@clr/angular";
 
 import { CustomerRoutingModule } from "./customer-routing.module";
 
+import { CustomerService } from "./customer.service";
+
 import { CustomerSearchComponent } from "./containers/customer-search/customer-search.component";
 import { CustomerCreateComponent } from "./containers/customer-create/customer-create.component";
 
-import { CustomerService } from "./customer.service";
-import { PageComponent } from "src/app/ui/dashboard/page/page.component";
+import { ContentAreaModule } from "src/app/ui/content-area/content-area.module";
 
 @NgModule({
-  declarations: [
-    CustomerSearchComponent,
-    CustomerCreateComponent,
-    PageComponent
+  declarations: [CustomerSearchComponent, CustomerCreateComponent],
+  imports: [
+    CommonModule,
+    CustomerRoutingModule,
+    ClarityModule,
+    ContentAreaModule
   ],
-  imports: [CommonModule, CustomerRoutingModule, ClarityModule],
   providers: [CustomerService]
 })
 export class CustomerModule {}
