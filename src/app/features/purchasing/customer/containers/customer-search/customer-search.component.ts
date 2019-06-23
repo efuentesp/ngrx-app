@@ -23,7 +23,6 @@ export class CustomerSearchComponent implements OnInit {
   constructor(private store$: Store<RootStoreState.State>) {}
 
   ngOnInit() {
-    console.log("CustomerSearchComponent ngOnInit()");
     this.customerItems$ = this.store$.select(
       CustomerStoreSelectors.selectAllCustomerItems
     );

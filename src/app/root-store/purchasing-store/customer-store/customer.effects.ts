@@ -1,7 +1,15 @@
 import { Injectable } from "@angular/core";
+import { Action } from "@ngrx/store";
 import { Actions, Effect, ofType } from "@ngrx/effects";
-import { of } from "rxjs";
-import { map, mergeMap, switchMap, catchError } from "rxjs/operators";
+import { of, Observable } from "rxjs";
+import {
+  map,
+  filter,
+  mergeMap,
+  switchMap,
+  catchError,
+  tap
+} from "rxjs/operators";
 
 import { Customer } from "src/app/features/purchasing/customer/customer.model";
 import { CustomerService } from "src/app/features/purchasing/customer/customer.service";
@@ -16,7 +24,7 @@ export class CustomerStoreEffects {
   ) {}
 
   @Effect()
-  findAllEffectRequest$ = this.actions$.pipe(
+  findAllRequestEffect$ = this.actions$.pipe(
     ofType(CustomerActions.CustomerActionTypes.FindAllRequest),
     switchMap((action: CustomerActions.FindAllRequest) =>
       this.customerService.findAll("").pipe(
@@ -30,16 +38,13 @@ export class CustomerStoreEffects {
   );
 
   @Effect()
-  createNewEffectRequest$ = this.actions$.pipe(
+  CreateNewRequestEffect$ = this.actions$.pipe(
     ofType(CustomerActions.CustomerActionTypes.CreateNewRequest),
-    switchMap(payload => {
-      console.log(payload);
-      return this.customerService.create(payload).pipe(
-        map(
-          (customer: Customer) => new CustomerActions.CreateNewSuccess(customer)
-        ),
+    switchMap((action: CustomerActions.CreateNewRequest) =>
+      this.customerService.create(action.payload).pipe(
+        map(payload => new CustomerActions.CreateNewSuccess(payload)),
         catchError(error => of(new CustomerActions.CreateNewFailure(error)))
-      );
-    })
+      )
+    )
   );
 }

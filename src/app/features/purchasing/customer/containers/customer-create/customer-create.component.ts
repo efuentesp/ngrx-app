@@ -27,7 +27,6 @@ export class CustomerCreateComponent implements OnInit {
 
   submit() {
     if (this.formCreateCustomer.valid) {
-      console.log(this.formCreateCustomer.value);
       this.store$.dispatch(
         new CustomerStoreActions.CreateNewRequest(this.formCreateCustomer.value)
       );
