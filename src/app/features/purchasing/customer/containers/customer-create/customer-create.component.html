@@ -34,8 +34,18 @@
         </clr-input-container>
       </div>
       <div class="card-footer">
-        <button class="btn btn-primary" type="submit">Save</button>
-        <button class="btn" type="button" (click)="resetForm()">Reset</button>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [clrLoading]="submitBtnState$ | async"
+        >
+          <clr-icon shape="floppy"></clr-icon>
+          Save
+        </button>
+        <button class="btn" type="button" (click)="resetForm()">
+          <clr-icon shape="eraser"></clr-icon>
+          Reset
+        </button>
       </div>
     </div>
   </form>

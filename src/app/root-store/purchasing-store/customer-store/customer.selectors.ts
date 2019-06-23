@@ -4,12 +4,17 @@ import {
   MemoizedSelector
 } from "@ngrx/store";
 
+import { ClrLoadingState } from "@clr/angular";
+
 import { Customer } from "src/app/features/purchasing/customer/customer.model";
 
 import { customerAdapter, CustomerState } from "./customer.state";
 
 export const getError = (state: CustomerState): any => state.error;
 export const getIsLoading = (state: CustomerState): boolean => state.isLoading;
+
+export const getClrLoadingState = (state: CustomerState): ClrLoadingState =>
+  state.isLoading ? ClrLoadingState.LOADING : ClrLoadingState.DEFAULT;
 
 export const selectCustomerState: MemoizedSelector<
   object,
@@ -46,4 +51,12 @@ export const selectCustomerIsLoading: MemoizedSelector<
 > = createSelector(
   selectCustomerState,
   getIsLoading
+);
+
+export const selectClrLoadingState: MemoizedSelector<
+  object,
+  ClrLoadingState
+> = createSelector(
+  selectCustomerState,
+  getClrLoadingState
 );

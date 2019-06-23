@@ -32,7 +32,6 @@ export function customerReducer(
         error: null
       };
     case CustomerActionTypes.CreateNewSuccess:
-      console.log("CreateNewSuccess reducer", action.payload);
       return customerAdapter.addOne(action.payload, {
         ...state,
         isLoading: false,

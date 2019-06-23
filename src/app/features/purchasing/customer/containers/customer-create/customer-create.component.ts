@@ -1,9 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 
-import { RootStoreState, CustomerStoreActions } from "src/app/root-store";
+import { ClrLoadingState } from "@clr/angular";
+
+import { Observable } from "rxjs";
+
+import {
+  RootStoreState,
+  CustomerStoreActions,
+  CustomerStoreSelectors
+} from "src/app/root-store";
 
 @Component({
   selector: "app-customer-create",
@@ -12,6 +20,8 @@ import { RootStoreState, CustomerStoreActions } from "src/app/root-store";
 })
 export class CustomerCreateComponent implements OnInit {
   formCreateCustomer: FormGroup;
+  isLoading$: Observable<boolean>;
+  submitBtnState$: Observable<ClrLoadingState>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,7 +33,14 @@ export class CustomerCreateComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isLoading$ = this.store$.select(
+      CustomerStoreSelectors.selectCustomerIsLoading
+    );
+    this.submitBtnState$ = this.store$.select(
+      CustomerStoreSelectors.selectClrLoadingState
+    );
+  }
 
   submit() {
     if (this.formCreateCustomer.valid) {
@@ -31,7 +48,7 @@ export class CustomerCreateComponent implements OnInit {
         new CustomerStoreActions.CreateNewRequest(this.formCreateCustomer.value)
       );
     } else {
-      console.log("Invalid form!");
+      console.error("Invalid form!");
       this.formCreateCustomer.markAsTouched();
     }
   }
