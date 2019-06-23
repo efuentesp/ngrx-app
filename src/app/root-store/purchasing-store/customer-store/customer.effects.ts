@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+
 import { Action } from "@ngrx/store";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { of, Observable } from "rxjs";
@@ -20,7 +22,8 @@ import * as CustomerActions from "./customer.actions";
 export class CustomerStoreEffects {
   constructor(
     private actions$: Actions,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private router: Router
   ) {}
 
   @Effect()
@@ -45,6 +48,7 @@ export class CustomerStoreEffects {
         map((customer: Customer) => {
           return new CustomerActions.CreateNewSuccess(customer);
         }),
+        tap(() => this.router.navigate(["/purchasing/customer/search"])),
         catchError(error => of(new CustomerActions.CreateNewFailure(error)))
       )
     )

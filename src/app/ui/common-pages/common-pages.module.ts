@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 
 @NgModule({
   declarations: [LandingPageComponent, PageNotFoundComponent],
-  imports: [CommonModule, ClarityModule]
+  imports: [CommonModule, ClarityModule],
+  exports: [LandingPageComponent, PageNotFoundComponent]
 })
 export class CommonPagesModule {}
