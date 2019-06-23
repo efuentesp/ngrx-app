@@ -40,7 +40,7 @@ export class CreateNewRequest implements Action {
 
 export class CreateNewSuccess implements Action {
   readonly type = CustomerActionTypes.CreateNewSuccess;
-  constructor(public payload: any) {}
+  constructor(public payload: Customer) {}
 }
 
 export class CreateNewFailure implements Action {

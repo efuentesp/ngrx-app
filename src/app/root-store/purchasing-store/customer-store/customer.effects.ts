@@ -24,7 +24,7 @@ export class CustomerStoreEffects {
   ) {}
 
   @Effect()
-  findAllRequestEffect$ = this.actions$.pipe(
+  findAllRequestEffect$: Observable<Action> = this.actions$.pipe(
     ofType(CustomerActions.CustomerActionTypes.FindAllRequest),
     switchMap((action: CustomerActions.FindAllRequest) =>
       this.customerService.findAll("").pipe(
@@ -38,11 +38,13 @@ export class CustomerStoreEffects {
   );
 
   @Effect()
-  CreateNewRequestEffect$ = this.actions$.pipe(
+  CreateNewRequestEffect$: Observable<Action> = this.actions$.pipe(
     ofType(CustomerActions.CustomerActionTypes.CreateNewRequest),
     switchMap((action: CustomerActions.CreateNewRequest) =>
       this.customerService.create(action.payload).pipe(
-        map(payload => new CustomerActions.CreateNewSuccess(payload)),
+        map((customer: Customer) => {
+          return new CustomerActions.CreateNewSuccess(customer);
+        }),
         catchError(error => of(new CustomerActions.CreateNewFailure(error)))
       )
     )
