@@ -5,5 +5,15 @@
     [createAction]="true"
     [editAction]="true"
     [deleteAction]="true"
+    (onEditCustomer)="onEditCustomerAction($event)"
+    (onDeleteCustomer)="onDeleteCustomerAction($event)"
   ></app-customer-search>
 </app-page>
+
+<app-alert
+  title="Delete Customer"
+  message="Are you want to Delete this Customer?"
+  [isAlertVisible]="isDeleteAlertVisible"
+  (onClickOk)="onConfirmDeleteCustomerAlert()"
+  (onClickCancel)="onCancelDeleteCustomerAlert()"
+></app-alert>

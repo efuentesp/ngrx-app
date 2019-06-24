@@ -1,0 +1,36 @@
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+
+enum AlertType {
+  WARNING,
+  ERROR,
+  SUCCESS,
+  INFO,
+  QUESTION
+}
+
+@Component({
+  selector: "app-alert",
+  templateUrl: "./alert.component.html",
+  styleUrls: ["./alert.component.css"]
+})
+export class AlertComponent implements OnInit {
+  @Input() title: String = "";
+  @Input() message: String = "";
+  @Input() type: AlertType = AlertType.SUCCESS;
+  @Input() isAlertVisible: boolean = false;
+
+  @Output() onClickOk = new EventEmitter();
+  @Output() onClickCancel = new EventEmitter();
+
+  constructor() {}
+
+  ngOnInit() {}
+
+  _onClickOk() {
+    this.onClickOk.emit();
+  }
+
+  _onClickCancel() {
+    this.onClickCancel.emit();
+  }
+}

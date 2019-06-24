@@ -20,6 +20,8 @@ export class CustomerSearchPageComponent implements OnInit {
   error$: Observable<string>;
   isLoading$: Observable<boolean>;
 
+  isDeleteAlertVisible: boolean = false;
+
   constructor(private store$: Store<RootStoreState.State>) {}
 
   ngOnInit() {
@@ -36,5 +38,22 @@ export class CustomerSearchPageComponent implements OnInit {
     );
 
     this.store$.dispatch(new CustomerStoreActions.FindAllRequest());
+  }
+
+  onEditCustomerAction(customer: Customer) {
+    console.log("Edit Customer:", customer);
+  }
+
+  onDeleteCustomerAction(customer: Customer) {
+    console.log("Delete Customer:", customer);
+    this.isDeleteAlertVisible = true;
+  }
+
+  onConfirmDeleteCustomerAlert() {
+    this.isDeleteAlertVisible = false;
+  }
+
+  onCancelDeleteCustomerAlert() {
+    this.isDeleteAlertVisible = false;
   }
 }

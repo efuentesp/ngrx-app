@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 import { Customer } from "../../customer.model";
 
@@ -14,7 +14,20 @@ export class CustomerSearchComponent implements OnInit {
   @Input() editAction: boolean = false;
   @Input() deleteAction: boolean = false;
 
+  @Output() onEditCustomer = new EventEmitter();
+  @Output() onDeleteCustomer = new EventEmitter();
+
   constructor() {}
 
   ngOnInit() {}
+
+  _onEditCustomer(customer: Customer) {
+    //console.log("Edit Customer:", customer);
+    this.onEditCustomer.emit(customer);
+  }
+
+  _onDeleteCustomer(customer: Customer) {
+    //console.log("Delete Customer:", customer);
+    this.onDeleteCustomer.emit(customer);
+  }
 }

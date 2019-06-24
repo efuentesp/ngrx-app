@@ -21,10 +21,18 @@
     [clrDgItem]="customer"
   >
     <clr-dg-action-overflow *ngIf="editAction || deleteAction">
-      <button class="action-item" (click)="onEdit(user)" *ngIf="editAction">
+      <button
+        class="action-item"
+        (click)="_onEditCustomer(customer)"
+        *ngIf="editAction"
+      >
         <clr-icon shape="pencil"></clr-icon> Edit
       </button>
-      <button class="action-item" (click)="onDelete(user)" *ngIf="deleteAction">
+      <button
+        class="action-item"
+        (click)="_onDeleteCustomer(customer)"
+        *ngIf="deleteAction"
+      >
         <clr-icon shape="trash"></clr-icon> Delete
       </button>
     </clr-dg-action-overflow>

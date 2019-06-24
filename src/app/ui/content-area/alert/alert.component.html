@@ -1,0 +1,14 @@
+<clr-modal [(clrModalOpen)]="isAlertVisible">
+  <h3 class="modal-title">{{ title }}</h3>
+  <div class="modal-body">
+    <p>{{ message }}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="_onClickOk()">
+      Cancel
+    </button>
+    <button type="button" class="btn btn-primary" (click)="_onClickCancel()">
+      Ok
+    </button>
+  </div>
+</clr-modal>
