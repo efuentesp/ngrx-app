@@ -1,21 +1,21 @@
 import { Component, OnInit } from "@angular/core";
-import { Store, select } from "@ngrx/store";
+
+import { Store } from "@ngrx/store";
+import {
+  RootStoreState,
+  CustomerStoreSelectors,
+  CustomerStoreActions
+} from "src/app/root-store";
 import { Observable } from "rxjs";
 
 import { Customer } from "../../customer.model";
 
-import {
-  RootStoreState,
-  CustomerStoreActions,
-  CustomerStoreSelectors
-} from "src/app/root-store";
-
 @Component({
-  selector: "app-customer-search",
-  templateUrl: "./customer-search.component.html",
-  styleUrls: ["./customer-search.component.scss"]
+  selector: "app-customer-search-page",
+  templateUrl: "./customer-search-page.component.html",
+  styleUrls: ["./customer-search-page.component.css"]
 })
-export class CustomerSearchComponent implements OnInit {
+export class CustomerSearchPageComponent implements OnInit {
   customerItems$: Observable<Customer[]>;
   error$: Observable<string>;
   isLoading$: Observable<boolean>;

@@ -1,0 +1,9 @@
+<app-page title="Search Customer">
+  <app-customer-search
+    [customerItems]="customerItems$ | async"
+    [isLoading]="isLoading$ | async"
+    [createAction]="true"
+    [editAction]="true"
+    [deleteAction]="true"
+  ></app-customer-search>
+</app-page>

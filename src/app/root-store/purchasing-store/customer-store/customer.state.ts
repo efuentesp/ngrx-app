@@ -9,9 +9,9 @@ export interface CustomerState extends EntityState<Customer> {
 export const customerAdapter: EntityAdapter<Customer> = createEntityAdapter<
   Customer
 >({
-  selectId: model => model.id
-  // sortComparer: (a: Customer, b: Customer): number =>
-  //   b.someDate.toString().localeCompare(a.someDate.toString())
+  selectId: model => model.id,
+  sortComparer: (a: Customer, b: Customer): number =>
+    b.id.toString().localeCompare(a.id.toString())
 });
 
 export const initialState: CustomerState = customerAdapter.getInitialState({

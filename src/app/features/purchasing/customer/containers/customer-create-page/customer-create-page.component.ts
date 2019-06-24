@@ -14,11 +14,11 @@ import {
 } from "src/app/root-store";
 
 @Component({
-  selector: "app-customer-create",
-  templateUrl: "./customer-create.component.html",
-  styleUrls: ["./customer-create.component.scss"]
+  selector: "app-customer-create-page",
+  templateUrl: "./customer-create-page.component.html",
+  styleUrls: ["./customer-create-page.component.scss"]
 })
-export class CustomerCreateComponent implements OnInit {
+export class CustomerCreatePageComponent implements OnInit {
   formCreateCustomer: FormGroup;
   isLoading$: Observable<boolean>;
   submitBtnState$: Observable<ClrLoadingState>;

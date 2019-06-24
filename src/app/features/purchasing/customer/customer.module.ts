@@ -9,13 +9,19 @@ import { CustomerRoutingModule } from "./customer-routing.module";
 
 import { CustomerService } from "./customer.service";
 
-import { CustomerSearchComponent } from "./containers/customer-search/customer-search.component";
-import { CustomerCreateComponent } from "./containers/customer-create/customer-create.component";
-
 import { ContentAreaModule } from "src/app/ui/content-area/content-area.module";
 
+import { CustomerSearchPageComponent } from "./containers/customer-search-page/customer-search-page.component";
+import { CustomerCreatePageComponent } from "./containers/customer-create-page/customer-create-page.component";
+
+import { CustomerSearchComponent } from "./components/customer-search/customer-search.component";
+
 @NgModule({
-  declarations: [CustomerSearchComponent, CustomerCreateComponent],
+  declarations: [
+    CustomerSearchComponent,
+    CustomerCreatePageComponent,
+    CustomerSearchPageComponent
+  ],
   imports: [
     CommonModule,
     CustomerRoutingModule,
