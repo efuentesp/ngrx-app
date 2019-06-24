@@ -11,24 +11,32 @@ import { Customer } from "./customer.model";
   providedIn: "root"
 })
 export class CustomerService {
-  constructor(private http: HttpClient) {}
+  url: String = environment.apiUrl;
+
+  constructor(private http: HttpClient) {
+    this.url = environment.apiUrl;
+  }
 
   findAll(query: string): Observable<Customer[]> {
-    const url = environment.apiUrl;
     let queryUrl;
     if (query) {
-      queryUrl = `${url}/customer?${query}`;
+      queryUrl = `${this.url}/customer?${query}`;
     } else {
-      queryUrl = `${url}/customer`;
+      queryUrl = `${this.url}/customer`;
     }
 
     return this.http.get<Customer[]>(queryUrl);
   }
 
   create(customer: Customer): Observable<Customer> {
-    const url = environment.apiUrl;
-    const queryUrl = `${url}/customer`;
+    const queryUrl = `${this.url}/customer`;
 
     return this.http.post<Customer>(queryUrl, customer);
+  }
+
+  delete(id: string): Observable<any> {
+    const queryUrl = `${this.url}/customer/${id}`;
+
+    return this.http.delete<any>(queryUrl, {});
   }
 }

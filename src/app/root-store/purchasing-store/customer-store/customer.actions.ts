@@ -64,6 +64,7 @@ export class UpdateFailure implements Action {
 
 export class DeleteRequest implements Action {
   readonly type = CustomerActionTypes.DeleteRequest;
+  constructor(public payload: { id: string }) {}
 }
 
 export class DeleteSuccess implements Action {

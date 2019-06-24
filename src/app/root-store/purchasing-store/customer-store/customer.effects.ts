@@ -11,7 +11,8 @@ import {
   switchMap,
   catchError,
   tap,
-  delay
+  delay,
+  withLatestFrom
 } from "rxjs/operators";
 
 import { Customer } from "src/app/features/purchasing/customer/customer.model";
@@ -51,6 +52,19 @@ export class CustomerStoreEffects {
         }),
         tap(() => this.router.navigate(["/purchasing/customer/search"])),
         catchError(error => of(new CustomerActions.CreateNewFailure(error)))
+      )
+    )
+  );
+
+  @Effect()
+  DeleteRequestEffect$: Observable<Action> = this.actions$.pipe(
+    ofType(CustomerActions.CustomerActionTypes.DeleteRequest),
+    mergeMap((action: CustomerActions.DeleteRequest) =>
+      this.customerService.delete(action.payload.id).pipe(
+        map(() => {
+          return new CustomerActions.DeleteSuccess({ id: action.payload.id });
+        }),
+        catchError(error => of(new CustomerActions.DeleteFailure(error)))
       )
     )
   );

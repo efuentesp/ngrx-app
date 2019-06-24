@@ -22,6 +22,8 @@ export class CustomerSearchPageComponent implements OnInit {
 
   isDeleteAlertVisible: boolean = false;
 
+  selectedCustomer: Customer = null;
+
   constructor(private store$: Store<RootStoreState.State>) {}
 
   ngOnInit() {
@@ -42,15 +44,20 @@ export class CustomerSearchPageComponent implements OnInit {
 
   onEditCustomerAction(customer: Customer) {
     console.log("Edit Customer:", customer);
+    this.selectedCustomer = customer;
   }
 
   onDeleteCustomerAction(customer: Customer) {
-    console.log("Delete Customer:", customer);
+    //console.log("Delete Customer:", customer);
+    this.selectedCustomer = customer;
     this.isDeleteAlertVisible = true;
   }
 
   onConfirmDeleteCustomerAlert() {
     this.isDeleteAlertVisible = false;
+    this.store$.dispatch(
+      new CustomerStoreActions.DeleteRequest({ id: this.selectedCustomer.id })
+    );
   }
 
   onCancelDeleteCustomerAlert() {
