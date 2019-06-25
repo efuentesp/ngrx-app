@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 import { Store } from "@ngrx/store";
 import {
@@ -24,7 +25,10 @@ export class CustomerSearchPageComponent implements OnInit {
 
   selectedCustomer: Customer = null;
 
-  constructor(private store$: Store<RootStoreState.State>) {}
+  constructor(
+    private store$: Store<RootStoreState.State>,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.customerItems$ = this.store$.select(
@@ -43,8 +47,9 @@ export class CustomerSearchPageComponent implements OnInit {
   }
 
   onEditCustomerAction(customer: Customer) {
-    console.log("Edit Customer:", customer);
+    //console.log("Edit Customer:", customer);
     this.selectedCustomer = customer;
+    this.router.navigate(["/purchasing/customer/update/" + customer.id]);
   }
 
   onDeleteCustomerAction(customer: Customer) {

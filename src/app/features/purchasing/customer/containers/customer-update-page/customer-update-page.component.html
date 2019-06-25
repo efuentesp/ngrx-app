@@ -1,0 +1,52 @@
+<app-page title="Update Customer">
+  <form
+    clrForm
+    clrLayout="vertical"
+    [formGroup]="formUpdateCustomer"
+    (ngSubmit)="submit()"
+  >
+    <div class="card">
+      <div class="card-block">
+        <clr-input-container>
+          <label class="clr-col-12 clr-col-md-4">ID</label>
+          <input
+            clrInput
+            formControlName="id"
+            type="text"
+            class="clr-col-12 clr-col-md-8"
+          />
+          <clr-control-error *clrIfError="required"
+            >ID Required</clr-control-error
+          >
+        </clr-input-container>
+
+        <clr-input-container>
+          <label class="clr-col-12 clr-col-md-4">Name</label>
+          <input
+            clrInput
+            formControlName="name"
+            type="text"
+            class="clr-col-12 clr-col-md-8"
+          />
+          <clr-control-error *clrIfError="required"
+            >Name Required</clr-control-error
+          >
+        </clr-input-container>
+      </div>
+      <div class="card-footer">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [clrLoading]="submitBtnState$ | async"
+        >
+          <clr-icon shape="floppy"></clr-icon>
+          Save
+        </button>
+        <button class="btn" type="button" (click)="resetForm()">
+          <clr-icon shape="eraser"></clr-icon>
+          Reset
+        </button>
+      </div>
+    </div>
+  </form>
+</app-page>

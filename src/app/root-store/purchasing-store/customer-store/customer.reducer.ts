@@ -25,6 +25,25 @@ export function customerReducer(
         error: action.payload
       };
 
+    case CustomerActionTypes.FindOneRequest:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case CustomerActionTypes.FindOneSuccess:
+      return customerAdapter.addOne(action.payload, {
+        ...state,
+        isLoading: false,
+        error: null
+      });
+    case CustomerActionTypes.FindOneFailure:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
     case CustomerActionTypes.CreateNewRequest:
       return {
         ...state,

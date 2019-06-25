@@ -6,6 +6,10 @@ export enum CustomerActionTypes {
   FindAllSuccess = "[Customer] Find All Customers response succesfully",
   FindAllFailure = "[Customer] Find All Customers response failure",
 
+  FindOneRequest = "[Customer] Find One Customer request",
+  FindOneSuccess = "[Customer] Find One Customer response succesfully",
+  FindOneFailure = "[Customer] Find One Customer response failure",
+
   CreateNewRequest = "[Customer] Create new Customer request",
   CreateNewSuccess = "[Customer] Create new Customer response successfully",
   CreateNewFailure = "[Customer] Create new Customer response failure",
@@ -33,6 +37,21 @@ export class FindAllFailure implements Action {
   constructor(public payload: any) {}
 }
 
+export class FindOneRequest implements Action {
+  readonly type = CustomerActionTypes.FindOneRequest;
+  constructor(public payload: { id: string }) {}
+}
+
+export class FindOneSuccess implements Action {
+  readonly type = CustomerActionTypes.FindOneSuccess;
+  constructor(public payload: Customer) {}
+}
+
+export class FindOneFailure implements Action {
+  readonly type = CustomerActionTypes.FindOneFailure;
+  constructor(public payload: any) {}
+}
+
 export class CreateNewRequest implements Action {
   readonly type = CustomerActionTypes.CreateNewRequest;
   constructor(public payload: Customer) {}
@@ -50,6 +69,7 @@ export class CreateNewFailure implements Action {
 
 export class UpdateRequest implements Action {
   readonly type = CustomerActionTypes.UpdateRequest;
+  constructor(public payload: { id: string; newCustomerValues: Customer }) {}
 }
 
 export class UpdateSuccess implements Action {
@@ -81,6 +101,9 @@ export type CustomerActions =
   | FindAllRequest
   | FindAllSuccess
   | FindAllFailure
+  | FindOneRequest
+  | FindOneSuccess
+  | FindOneFailure
   | CreateNewRequest
   | CreateNewSuccess
   | CreateNewFailure

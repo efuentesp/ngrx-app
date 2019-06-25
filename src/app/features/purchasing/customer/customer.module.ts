@@ -13,14 +13,16 @@ import { ContentAreaModule } from "src/app/ui/content-area/content-area.module";
 
 import { CustomerSearchPageComponent } from "./containers/customer-search-page/customer-search-page.component";
 import { CustomerCreatePageComponent } from "./containers/customer-create-page/customer-create-page.component";
+import { CustomerUpdatePageComponent } from "./containers/customer-update-page/customer-update-page.component";
 
 import { CustomerSearchComponent } from "./components/customer-search/customer-search.component";
 
 @NgModule({
   declarations: [
     CustomerSearchComponent,
+    CustomerSearchPageComponent,
     CustomerCreatePageComponent,
-    CustomerSearchPageComponent
+    CustomerUpdatePageComponent
   ],
   imports: [
     CommonModule,

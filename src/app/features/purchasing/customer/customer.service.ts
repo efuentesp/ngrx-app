@@ -28,6 +28,12 @@ export class CustomerService {
     return this.http.get<Customer[]>(queryUrl);
   }
 
+  findOne(id: string): Observable<Customer> {
+    let queryUrl = `${this.url}/customer/${id}`;
+
+    return this.http.get<Customer>(queryUrl);
+  }
+
   create(customer: Customer): Observable<Customer> {
     const queryUrl = `${this.url}/customer`;
 

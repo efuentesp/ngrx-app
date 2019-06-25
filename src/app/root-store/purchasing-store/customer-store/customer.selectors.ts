@@ -27,7 +27,7 @@ export const selectAllCustomerItems: (
 
 export const selectCustomerById = (id: string) =>
   createSelector(
-    this.selectCustomerItems,
+    selectAllCustomerItems,
     (allCustomer: Customer[]) => {
       if (allCustomer) {
         return allCustomer.find(p => p.id === id);

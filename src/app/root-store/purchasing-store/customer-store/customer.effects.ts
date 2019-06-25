@@ -43,6 +43,19 @@ export class CustomerStoreEffects {
   );
 
   @Effect()
+  findOneRequestEffect$: Observable<Action> = this.actions$.pipe(
+    ofType(CustomerActions.CustomerActionTypes.FindOneRequest),
+    switchMap((action: CustomerActions.FindOneRequest) =>
+      this.customerService.findOne(action.payload.id).pipe(
+        map(
+          (customer: Customer) => new CustomerActions.FindOneSuccess(customer)
+        ),
+        catchError(error => of(new CustomerActions.FindAllFailure(error)))
+      )
+    )
+  );
+
+  @Effect()
   CreateNewRequestEffect$: Observable<Action> = this.actions$.pipe(
     ofType(CustomerActions.CustomerActionTypes.CreateNewRequest),
     switchMap((action: CustomerActions.CreateNewRequest) =>
