@@ -11,8 +11,10 @@ import {
   CustomerState,
   CustomerForm,
   validateAndUpdateCustomerForm,
-  CUSTOMER_FORM_ID
+  CUSTOMER_FORM_ID,
+  initialStateCustomerForm
 } from "./customer.state";
+
 import { CustomerActions, CustomerActionTypes } from "./customer.actions";
 
 const customerFormReducer = createFormStateReducerWithUpdate<CustomerForm>(
@@ -40,18 +42,21 @@ export function customerReducer(
       return {
         ...state,
         isLoading: true,
+        isSubmitting: false,
         error: null
       };
     case CustomerActionTypes.FindAllSuccess:
       return customerAdapter.addAll(action.payload, {
         ...state,
         isLoading: false,
+        isSubmitting: false,
         error: null
       });
     case CustomerActionTypes.FindAllFailure:
       return {
         ...state,
         isLoading: false,
+        isSubmitting: false,
         error: action.payload
       };
 
@@ -59,10 +64,11 @@ export function customerReducer(
       return {
         ...state,
         isLoading: true,
+        isSubmitting: false,
         error: null
       };
     case CustomerActionTypes.FindOneSuccess:
-      const customerEditForm = createFormGroupState<CustomerForm>(
+      const customerUpdateForm = createFormGroupState<CustomerForm>(
         CUSTOMER_FORM_ID,
         {
           id: action.payload.id,
@@ -73,9 +79,10 @@ export function customerReducer(
       return customerAdapter.addOne(action.payload, {
         ...state,
         isLoading: false,
+        isSubmitting: false,
         error: null,
         customerForm: {
-          formState: customerEditForm,
+          formState: customerUpdateForm,
           submittedValues: undefined
         }
       });
@@ -83,32 +90,37 @@ export function customerReducer(
       return {
         ...state,
         isLoading: false,
+        isSubmitting: false,
         error: action.payload
       };
 
     case CustomerActionTypes.CreateNewRequest:
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
+        isSubmitting: true,
         error: null
       };
     case CustomerActionTypes.CreateNewSuccess:
       return customerAdapter.addOne(action.payload, {
         ...state,
         isLoading: false,
+        isSubmitting: false,
         error: null
       });
     case CustomerActionTypes.CreateNewFailure:
       return {
         ...state,
         isLoading: false,
+        isSubmitting: false,
         error: action.payload
       };
 
     case CustomerActionTypes.UpdateRequest:
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
+        isSubmitting: true,
         error: null
       };
     case CustomerActionTypes.UpdateSuccess:
@@ -120,6 +132,7 @@ export function customerReducer(
         {
           ...state,
           isLoading: false,
+          isSubmitting: false,
           error: null
         }
       );
@@ -127,25 +140,29 @@ export function customerReducer(
       return {
         ...state,
         isLoading: false,
+        isSubmitting: false,
         error: action.payload
       };
 
     case CustomerActionTypes.DeleteRequest:
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
+        isSubmitting: true,
         error: null
       };
     case CustomerActionTypes.DeleteSuccess:
       return customerAdapter.removeOne(action.payload.id, {
         ...state,
         isLoading: false,
+        isSubmitting: false,
         error: null
       });
     case CustomerActionTypes.DeleteFailure:
       return {
         ...state,
         isLoading: false,
+        isSubmitting: false,
         error: action.payload
       };
 

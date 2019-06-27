@@ -22,6 +22,7 @@ export interface CustomerForm {
 
 export interface CustomerState extends EntityState<Customer> {
   isLoading?: boolean;
+  isSubmitting?: boolean;
   error?: any;
   customerForm: {
     formState: FormGroupState<CustomerForm>;
@@ -47,6 +48,7 @@ export const initialStateCustomerForm = createFormGroupState<CustomerForm>(
 
 export const initialState: CustomerState = customerAdapter.getInitialState({
   isLoading: false,
+  isSubmitting: false,
   error: null,
   customerForm: {
     formState: initialStateCustomerForm,

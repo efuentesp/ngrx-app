@@ -12,9 +12,11 @@ import { customerAdapter, CustomerState } from "./customer.state";
 
 export const getError = (state: CustomerState): any => state.error;
 export const getIsLoading = (state: CustomerState): boolean => state.isLoading;
+export const getIsSubmitting = (state: CustomerState): boolean =>
+  state.isSubmitting;
 
 export const getClrLoadingState = (state: CustomerState): ClrLoadingState =>
-  state.isLoading ? ClrLoadingState.LOADING : ClrLoadingState.DEFAULT;
+  state.isSubmitting ? ClrLoadingState.LOADING : ClrLoadingState.DEFAULT;
 
 export const selectCustomerState: MemoizedSelector<
   object,
@@ -51,6 +53,14 @@ export const selectCustomerIsLoading: MemoizedSelector<
 > = createSelector(
   selectCustomerState,
   getIsLoading
+);
+
+export const selectCustomerIsSubmitting: MemoizedSelector<
+  object,
+  boolean
+> = createSelector(
+  selectCustomerState,
+  getIsSubmitting
 );
 
 export const selectClrLoadingState: MemoizedSelector<

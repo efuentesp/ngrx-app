@@ -13,11 +13,17 @@ import {
   CustomerStoreSelectors,
   CustomerStoreActions
 } from "src/app/root-store";
-import { FormGroupState, SetValueAction, ResetAction } from "ngrx-forms";
+import {
+  FormGroupState,
+  SetValueAction,
+  ResetAction,
+  createFormGroupState
+} from "ngrx-forms";
 
 import {
   CustomerForm,
-  initialStateCustomerForm
+  initialStateCustomerForm,
+  CUSTOMER_FORM_ID
 } from "src/app/root-store/purchasing-store/customer-store/customer.state";
 
 import { UpdateRequest } from "src/app/root-store/purchasing-store/customer-store/customer.actions";
@@ -93,12 +99,21 @@ export class CustomerUpdatePageComponent implements OnInit {
   }
 
   resetForm() {
-    this.store$.dispatch(
-      new SetValueAction(
-        initialStateCustomerForm.id,
-        initialStateCustomerForm.value
-      )
-    );
-    this.store$.dispatch(new ResetAction(initialStateCustomerForm.id));
+    console.log("CustomerUpdatePageComponent resetForm()");
+
+    this.selectedCustomer$.subscribe(customer => {
+      const customerUpdateForm = createFormGroupState<CustomerForm>(
+        CUSTOMER_FORM_ID,
+        {
+          id: customer.id,
+          name: customer.name
+        }
+      );
+
+      this.store$.dispatch(
+        new SetValueAction(customerUpdateForm.id, customerUpdateForm.value)
+      );
+      this.store$.dispatch(new ResetAction(customerUpdateForm.id));
+    });
   }
 }

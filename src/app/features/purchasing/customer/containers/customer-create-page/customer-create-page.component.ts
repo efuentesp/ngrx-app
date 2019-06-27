@@ -29,6 +29,7 @@ export class CustomerCreatePageComponent implements OnInit {
   submittedValues$: Observable<CustomerForm | undefined>;
 
   isLoading$: Observable<boolean>;
+  isSubmitting$: Observable<boolean>;
   submitBtnState$: Observable<ClrLoadingState>;
 
   constructor(private store$: Store<RootStoreState.State>) {
@@ -44,9 +45,14 @@ export class CustomerCreatePageComponent implements OnInit {
     this.isLoading$ = this.store$.select(
       CustomerStoreSelectors.selectCustomerIsLoading
     );
+    this.isSubmitting$ = this.store$.select(
+      CustomerStoreSelectors.selectCustomerIsSubmitting
+    );
     this.submitBtnState$ = this.store$.select(
       CustomerStoreSelectors.selectClrLoadingState
     );
+
+    this.resetForm();
   }
 
   submit() {
