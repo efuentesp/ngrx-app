@@ -70,6 +70,25 @@ export class CustomerStoreEffects {
   );
 
   @Effect()
+  UpdateRequestEffect$: Observable<Action> = this.actions$.pipe(
+    ofType(CustomerActions.CustomerActionTypes.UpdateRequest),
+    switchMap((action: CustomerActions.UpdateRequest) =>
+      this.customerService
+        .update(action.payload.id, action.payload.newCustomerValues)
+        .pipe(
+          map((customer: Customer) => {
+            return new CustomerActions.UpdateSuccess({
+              id: action.payload.id,
+              newCustomerValues: customer
+            });
+          }),
+          tap(() => this.router.navigate(["/purchasing/customer/search"])),
+          catchError(error => of(new CustomerActions.UpdateFailure(error)))
+        )
+    )
+  );
+
+  @Effect()
   DeleteRequestEffect$: Observable<Action> = this.actions$.pipe(
     ofType(CustomerActions.CustomerActionTypes.DeleteRequest),
     mergeMap((action: CustomerActions.DeleteRequest) =>

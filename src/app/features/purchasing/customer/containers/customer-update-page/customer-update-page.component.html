@@ -2,33 +2,32 @@
   <form
     clrForm
     clrLayout="vertical"
-    [formGroup]="formUpdateCustomer"
-    (ngSubmit)="submit()"
+    [ngrxFormState]="formCustomerState$ | async"
+    (submit)="submit()"
   >
     <div class="card">
       <div class="card-block">
         <clr-input-container>
           <label class="clr-col-12 clr-col-md-4">ID</label>
           <input
-            clrInput
-            formControlName="id"
             type="text"
+            clrInput
+            [ngrxFormControlState]="(formCustomerState$ | async).controls.id"
             class="clr-col-12 clr-col-md-8"
           />
-          <clr-control-error *clrIfError="required"
-            >ID Required</clr-control-error
-          >
+          <clr-control-error>ID Required</clr-control-error>
         </clr-input-container>
 
         <clr-input-container>
           <label class="clr-col-12 clr-col-md-4">Name</label>
           <input
-            clrInput
-            formControlName="name"
             type="text"
+            clrInput
+            [ngrxFormControlState]="(formCustomerState$ | async).controls.name"
             class="clr-col-12 clr-col-md-8"
           />
-          <clr-control-error *clrIfError="required"
+          <clr-control-error
+            *clrIfError="(formCustomerState$ | async).errors._name?.required"
             >Name Required</clr-control-error
           >
         </clr-input-container>
@@ -42,7 +41,16 @@
           <clr-icon shape="floppy"></clr-icon>
           Save
         </button>
-        <button class="btn" type="button" (click)="resetForm()">
+        <button
+          class="btn"
+          type="button"
+          (click)="resetForm()"
+          [disabled]="
+            (formCustomerState$ | async).isPristine &&
+            (formCustomerState$ | async).isUntouched &&
+            (formCustomerState$ | async).isUnsubmitted
+          "
+        >
           <clr-icon shape="eraser"></clr-icon>
           Reset
         </button>

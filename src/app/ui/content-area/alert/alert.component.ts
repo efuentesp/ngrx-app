@@ -14,8 +14,8 @@ enum AlertType {
   styleUrls: ["./alert.component.css"]
 })
 export class AlertComponent implements OnInit {
-  @Input() title: String = "";
-  @Input() message: String = "";
+  @Input() title: string = "";
+  @Input() message: string = "";
   @Input() type: AlertType = AlertType.SUCCESS;
   @Input() isAlertVisible: boolean = false;
 

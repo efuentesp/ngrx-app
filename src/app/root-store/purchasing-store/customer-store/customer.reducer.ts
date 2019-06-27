@@ -1,10 +1,40 @@
-import { customerAdapter, initialState, CustomerState } from "./customer.state";
+import {
+  formGroupReducer,
+  FormGroupState,
+  createFormStateReducerWithUpdate,
+  createFormGroupState
+} from "ngrx-forms";
+
+import {
+  customerAdapter,
+  initialState,
+  CustomerState,
+  CustomerForm,
+  validateAndUpdateCustomerForm,
+  CUSTOMER_FORM_ID
+} from "./customer.state";
 import { CustomerActions, CustomerActionTypes } from "./customer.actions";
+
+const customerFormReducer = createFormStateReducerWithUpdate<CustomerForm>(
+  validateAndUpdateCustomerForm
+);
 
 export function customerReducer(
   state = initialState,
   action: CustomerActions
 ): CustomerState {
+  const _customerForm = customerFormReducer(
+    state.customerForm.formState,
+    action
+  );
+
+  if (_customerForm !== state.customerForm.formState) {
+    state = {
+      ...state,
+      customerForm: { formState: _customerForm, submittedValues: undefined }
+    };
+  }
+
   switch (action.type) {
     case CustomerActionTypes.FindAllRequest:
       return {
@@ -32,10 +62,22 @@ export function customerReducer(
         error: null
       };
     case CustomerActionTypes.FindOneSuccess:
+      const customerEditForm = createFormGroupState<CustomerForm>(
+        CUSTOMER_FORM_ID,
+        {
+          id: action.payload.id,
+          name: action.payload.name
+        }
+      );
+
       return customerAdapter.addOne(action.payload, {
         ...state,
         isLoading: false,
-        error: null
+        error: null,
+        customerForm: {
+          formState: customerEditForm,
+          submittedValues: undefined
+        }
       });
     case CustomerActionTypes.FindOneFailure:
       return {

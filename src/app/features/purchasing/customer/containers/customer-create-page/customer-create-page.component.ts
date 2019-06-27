@@ -1,36 +1,43 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+//import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { Store, select } from "@ngrx/store";
 
 import { ClrLoadingState } from "@clr/angular";
 
 import { Observable } from "rxjs";
+import { take, map, tap, filter } from "rxjs/operators";
+
+import { RootStoreState, CustomerStoreSelectors } from "src/app/root-store";
+import { FormGroupState, SetValueAction, ResetAction } from "ngrx-forms";
 
 import {
-  RootStoreState,
-  CustomerStoreActions,
-  CustomerStoreSelectors
-} from "src/app/root-store";
+  CustomerForm,
+  initialStateCustomerForm
+} from "src/app/root-store/purchasing-store/customer-store/customer.state";
+
+import { CreateNewRequest } from "src/app/root-store/purchasing-store/customer-store/customer.actions";
 
 @Component({
   selector: "app-customer-create-page",
   templateUrl: "./customer-create-page.component.html",
-  styleUrls: ["./customer-create-page.component.scss"]
+  styleUrls: ["./customer-create-page.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomerCreatePageComponent implements OnInit {
-  formCreateCustomer: FormGroup;
+  formCustomerState$: Observable<FormGroupState<CustomerForm>>;
+  submittedValues$: Observable<CustomerForm | undefined>;
+
   isLoading$: Observable<boolean>;
   submitBtnState$: Observable<ClrLoadingState>;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private store$: Store<RootStoreState.State>
-  ) {
-    this.formCreateCustomer = this.formBuilder.group({
-      id: ["", [Validators.required]],
-      name: ["", Validators.required]
-    });
+  constructor(private store$: Store<RootStoreState.State>) {
+    this.formCustomerState$ = store$.pipe(
+      select(s => s.customer.customerForm.formState)
+    );
+    this.submittedValues$ = store$.pipe(
+      select(s => s.customer.customerForm.submittedValues)
+    );
   }
 
   ngOnInit() {
@@ -43,17 +50,23 @@ export class CustomerCreatePageComponent implements OnInit {
   }
 
   submit() {
-    if (this.formCreateCustomer.valid) {
-      this.store$.dispatch(
-        new CustomerStoreActions.CreateNewRequest(this.formCreateCustomer.value)
-      );
-    } else {
-      console.error("Invalid form!");
-      this.formCreateCustomer.markAsTouched();
-    }
+    this.formCustomerState$
+      .pipe(
+        take(1),
+        tap(v => console.log(v.errors)),
+        filter(fs => fs.isValid),
+        map(fs => new CreateNewRequest(fs.value))
+      )
+      .subscribe(this.store$);
   }
 
   resetForm() {
-    this.formCreateCustomer.reset();
+    this.store$.dispatch(
+      new SetValueAction(
+        initialStateCustomerForm.id,
+        initialStateCustomerForm.value
+      )
+    );
+    this.store$.dispatch(new ResetAction(initialStateCustomerForm.id));
   }
 }

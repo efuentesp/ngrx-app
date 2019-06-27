@@ -9,56 +9,8 @@
       "name": "cliente 2"
     },
     {
-      "id": "2",
-      "name": "2"
-    },
-    {
       "id": "C-004",
       "name": "Customer 4"
-    },
-    {
-      "id": "10",
-      "name": "10"
-    },
-    {
-      "id": "11",
-      "name": "11"
-    },
-    {
-      "id": "12",
-      "name": "12"
-    },
-    {
-      "id": "13",
-      "name": "13"
-    },
-    {
-      "id": "14",
-      "name": "14"
-    },
-    {
-      "id": "16",
-      "name": "16"
-    },
-    {
-      "id": "17",
-      "name": "17"
-    },
-    {
-      "id": "19",
-      "name": "19"
-    },
-    {
-      "id": "20",
-      "name": "20"
-    },
-    {
-      "id": "21",
-      "name": "21"
-    },
-    {
-      "id": "22",
-      "name": "22"
     },
     {
       "id": "C-005",
@@ -79,6 +31,38 @@
     {
       "id": "C-009",
       "name": "Cliente 9"
+    },
+    {
+      "id": "C-010",
+      "name": "Customer 10"
+    },
+    {
+      "id": "C-011",
+      "name": "Customer 11"
+    },
+    {
+      "id": "C-012",
+      "name": "Cliente 12"
+    },
+    {
+      "id": "C-013",
+      "name": "Customer 13"
+    },
+    {
+      "id": "C-014",
+      "name": "Customer 14"
+    },
+    {
+      "id": "C-015",
+      "name": "Customer 15"
+    },
+    {
+      "id": "C-016",
+      "name": "Customer 16"
+    },
+    {
+      "id": "C-017",
+      "name": "Cliente 17"
     }
   ]
 }

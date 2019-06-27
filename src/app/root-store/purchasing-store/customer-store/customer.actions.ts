@@ -1,5 +1,8 @@
 import { Action } from "@ngrx/store";
+
 import { Customer } from "src/app/features/purchasing/customer/customer.model";
+
+import { CustomerForm } from "./customer.state";
 
 export enum CustomerActionTypes {
   FindAllRequest = "[Customer] Find All Customers request",
@@ -54,7 +57,7 @@ export class FindOneFailure implements Action {
 
 export class CreateNewRequest implements Action {
   readonly type = CustomerActionTypes.CreateNewRequest;
-  constructor(public payload: Customer) {}
+  constructor(public payload: CustomerForm) {}
 }
 
 export class CreateNewSuccess implements Action {
@@ -69,7 +72,9 @@ export class CreateNewFailure implements Action {
 
 export class UpdateRequest implements Action {
   readonly type = CustomerActionTypes.UpdateRequest;
-  constructor(public payload: { id: string; newCustomerValues: Customer }) {}
+  constructor(
+    public payload: { id: string; newCustomerValues: CustomerForm }
+  ) {}
 }
 
 export class UpdateSuccess implements Action {

@@ -11,7 +11,7 @@ import { Customer } from "./customer.model";
   providedIn: "root"
 })
 export class CustomerService {
-  url: String = environment.apiUrl;
+  url: string = environment.apiUrl;
 
   constructor(private http: HttpClient) {
     this.url = environment.apiUrl;
@@ -38,6 +38,12 @@ export class CustomerService {
     const queryUrl = `${this.url}/customer`;
 
     return this.http.post<Customer>(queryUrl, customer);
+  }
+
+  update(id: string, customer: Customer): Observable<Customer> {
+    const queryUrl = `${this.url}/customer/${id}`;
+
+    return this.http.put<Customer>(queryUrl, customer);
   }
 
   delete(id: string): Observable<any> {
