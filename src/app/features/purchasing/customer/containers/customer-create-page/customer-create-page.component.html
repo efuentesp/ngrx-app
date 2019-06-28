@@ -10,6 +10,7 @@
         <clr-input-container>
           <label class="clr-col-12 clr-col-md-4">ID</label>
           <input
+            name="customer_id"
             type="text"
             clrInput
             [ngrxFormControlState]="(formCustomerState$ | async).controls.id"
@@ -31,6 +32,11 @@
             >Name Required</clr-control-error
           >
         </clr-input-container>
+        <!-- <ngrx-input
+          name="customer_id"
+          label="ID"
+          [ngrxFormControlState]="(formCustomerState$ | async).controls.name"
+        ></ngrx-input> -->
       </div>
       <div class="card-footer">
         <button

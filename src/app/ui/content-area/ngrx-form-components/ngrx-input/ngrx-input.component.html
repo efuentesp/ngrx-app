@@ -1,0 +1,21 @@
+<form class="clr-form">
+  <div class="clr-form-control">
+    <label for="{{ name }}" class="clr-control-label">{{ label }}</label>
+    <div class="clr-control-container">
+      <div class="clr-input-wrapper">
+        <input
+          type="text"
+          id="{{ name }}"
+          placeholder="{{ placeholder }}"
+          class="clr-input"
+        />
+        <clr-icon
+          *ngIf="error"
+          class="clr-validate-icon"
+          shape="exclamation-circle"
+        ></clr-icon>
+      </div>
+      <span class="clr-subtext">{{ help }}</span>
+    </div>
+  </div>
+</form>
