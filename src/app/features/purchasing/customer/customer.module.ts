@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-//import { ReactiveFormsModule } from "@angular/forms";
 
 import { ClarityModule } from "@clr/angular";
 
@@ -30,7 +29,6 @@ import { CustomerSearchComponent } from "./components/customer-search/customer-s
     CommonModule,
     CustomerRoutingModule,
     BrowserAnimationsModule,
-    //ReactiveFormsModule,
     ClarityModule,
     NgrxFormsModule,
     ContentAreaModule

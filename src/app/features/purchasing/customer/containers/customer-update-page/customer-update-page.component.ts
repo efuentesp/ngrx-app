@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-//import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { Store, select } from "@ngrx/store";
 
@@ -37,6 +36,7 @@ import { Customer } from "../../customer.model";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomerUpdatePageComponent implements OnInit {
+  error$: Observable<string>;
   formCustomerState$: Observable<FormGroupState<CustomerForm>>;
   submittedValues$: Observable<CustomerForm | undefined>;
 
@@ -51,6 +51,9 @@ export class CustomerUpdatePageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
+    this.error$ = this.store$.select(
+      CustomerStoreSelectors.selectCustomerError
+    );
     this.formCustomerState$ = store$.pipe(
       select(s => s.customer.customerForm.formState)
     );

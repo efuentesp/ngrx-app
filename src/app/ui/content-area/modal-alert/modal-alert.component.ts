@@ -9,9 +9,9 @@ enum AlertType {
 }
 
 @Component({
-  selector: "app-alert",
-  templateUrl: "./alert.component.html",
-  styleUrls: ["./alert.component.css"]
+  selector: "app-modal-alert",
+  templateUrl: "./modal-alert.component.html",
+  styleUrls: ["./modal-alert.component.css"]
 })
 export class AlertComponent implements OnInit {
   @Input() title: string = "";

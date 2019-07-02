@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-//import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { Store, select } from "@ngrx/store";
 
@@ -25,6 +24,7 @@ import { CreateNewRequest } from "src/app/root-store/purchasing-store/customer-s
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomerCreatePageComponent implements OnInit {
+  error$: Observable<string>;
   formCustomerState$: Observable<FormGroupState<CustomerForm>>;
   submittedValues$: Observable<CustomerForm | undefined>;
 
@@ -33,6 +33,9 @@ export class CustomerCreatePageComponent implements OnInit {
   submitBtnState$: Observable<ClrLoadingState>;
 
   constructor(private store$: Store<RootStoreState.State>) {
+    this.error$ = this.store$.select(
+      CustomerStoreSelectors.selectCustomerError
+    );
     this.formCustomerState$ = store$.pipe(
       select(s => s.customer.customerForm.formState)
     );
@@ -59,8 +62,8 @@ export class CustomerCreatePageComponent implements OnInit {
     this.formCustomerState$
       .pipe(
         take(1),
-        tap(v => console.log(v.errors)),
         filter(fs => fs.isValid),
+        tap(v => console.log(v.errors)),
         map(fs => new CreateNewRequest(fs.value))
       )
       .subscribe(this.store$);

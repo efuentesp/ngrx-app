@@ -1,13 +1,24 @@
 import { Input, Directive, Host, Optional } from "@angular/core";
 
-import { NgrxInputComponent } from "./ngrx-input.component";
+import { ClrInputContainer } from "@clr/angular";
+
 import { FormControlState } from "ngrx-forms";
 
 @Directive({
-  selector: "ngrx-input[ngrxFormControlState]"
+  selector: "[ngrxFormControlState]"
 })
 export class NgrxInputDirective {
-  @Input() set ngrxFormControlState(state: FormControlState<any>) {}
+  @Input() set ngrxFormControlState(state: FormControlState<any>) {
+    console.log(state);
+    const errorsAreShown =
+      state.isInvalid && (state.isTouched || state.isSubmitted);
 
-  constructor(@Host() @Optional() private input: NgrxInputComponent) {}
+    if (this.input) {
+      this.input.invalid = errorsAreShown;
+    }
+  }
+
+  constructor(@Host() @Optional() private input: ClrInputContainer) {
+    //console.log(input);
+  }
 }

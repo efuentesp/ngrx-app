@@ -1,4 +1,8 @@
 <app-page title="Create Customer">
+  <app-form-alert
+    *ngIf="error$ | async"
+    [message]="(error$ | async).message"
+  ></app-form-alert>
   <form
     clrForm
     clrLayout="vertical"
@@ -10,26 +14,38 @@
         <clr-input-container>
           <label class="clr-col-12 clr-col-md-4">ID</label>
           <input
-            name="customer_id"
-            type="text"
             clrInput
+            type="text"
+            name="customer_id"
             [ngrxFormControlState]="(formCustomerState$ | async).controls.id"
             class="clr-col-12 clr-col-md-8"
           />
-          <clr-control-error>ID Required</clr-control-error>
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._id?.required"
+            >Required field</clr-control-error
+          >
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._id?.maxLength"
+            >Maximum Character Limit Exceeded</clr-control-error
+          >
         </clr-input-container>
 
-        <clr-input-container>
+        <clr-input-container clr-error>
           <label class="clr-col-12 clr-col-md-4">Name</label>
           <input
-            type="text"
             clrInput
+            type="text"
+            name="customer_name"
             [ngrxFormControlState]="(formCustomerState$ | async).controls.name"
             class="clr-col-12 clr-col-md-8"
           />
           <clr-control-error
-            *clrIfError="(formCustomerState$ | async).errors._name?.required"
-            >Name Required</clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._name?.required"
+            >Required field</clr-control-error
+          >
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._name?.maxLength"
+            >Maximum Character Limit Exceeded</clr-control-error
           >
         </clr-input-container>
         <!-- <ngrx-input

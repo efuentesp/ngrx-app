@@ -8,6 +8,7 @@ import { NgrxInputDirective } from "./ngrx-input.directive";
   styleUrls: ["./ngrx-input.component.css"]
 })
 export class NgrxInputComponent implements OnInit {
+  @Input() parent: any;
   @Input() name: string;
   @Input() label: string = "";
   @Input() placeholder: string = "";

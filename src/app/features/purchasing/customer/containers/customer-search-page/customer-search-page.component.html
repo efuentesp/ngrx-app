@@ -1,4 +1,8 @@
 <app-page title="Search Customer">
+  <app-form-alert
+    *ngIf="error$ | async"
+    [message]="(error$ | async).message"
+  ></app-form-alert>
   <app-customer-search
     [customerItems]="customerItems$ | async"
     [isLoading]="isLoading$ | async"
@@ -10,10 +14,10 @@
   ></app-customer-search>
 </app-page>
 
-<app-alert
+<app-modal-alert
   title="Delete Customer"
   message="Are you want to Delete this Customer?"
   [isAlertVisible]="isDeleteAlertVisible"
   (onClickOk)="onConfirmDeleteCustomerAlert()"
   (onClickCancel)="onCancelDeleteCustomerAlert()"
-></app-alert>
+></app-modal-alert>

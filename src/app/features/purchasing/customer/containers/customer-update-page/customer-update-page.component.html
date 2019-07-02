@@ -1,4 +1,8 @@
 <app-page title="Update Customer">
+  <app-form-alert
+    *ngIf="error$ | async"
+    [message]="(error$ | async).message"
+  ></app-form-alert>
   <form
     clrForm
     clrLayout="vertical"
