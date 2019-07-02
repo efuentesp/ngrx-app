@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 
-import { NgrxInputDirective } from "./ngrx-input.directive";
+import { NgrxClrInputContainerDirective } from "./ngrx-clr-input-container.directive";
 
 @Component({
   selector: "ngrx-input",

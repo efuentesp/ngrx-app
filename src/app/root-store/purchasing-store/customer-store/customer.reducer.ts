@@ -72,7 +72,9 @@ export function customerReducer(
         CUSTOMER_FORM_ID,
         {
           id: action.payload.id,
-          name: action.payload.name
+          name: action.payload.name,
+          description: action.payload.description,
+          created_date: action.payload.created_date
         }
       );
 

@@ -8,7 +8,7 @@ import { AlertComponent } from "./modal-alert/modal-alert.component";
 import { NgrxFormAlertComponent } from "./form-alert/form-alert.component";
 
 import { NgrxInputComponent } from "./ngrx-form-components/ngrx-input/ngrx-input.component";
-import { NgrxInputDirective } from "./ngrx-form-components/ngrx-input/ngrx-input.directive";
+import { NgrxClrInputContainerDirective } from "./ngrx-form-components/ngrx-input/ngrx-clr-input-container.directive";
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { NgrxInputDirective } from "./ngrx-form-components/ngrx-input/ngrx-input
     AlertComponent,
     NgrxFormAlertComponent,
     NgrxInputComponent,
-    NgrxInputDirective
+    NgrxClrInputContainerDirective
   ],
   imports: [CommonModule, ClarityModule],
   exports: [
@@ -24,7 +24,7 @@ import { NgrxInputDirective } from "./ngrx-form-components/ngrx-input/ngrx-input
     AlertComponent,
     NgrxFormAlertComponent,
     NgrxInputComponent,
-    NgrxInputDirective
+    NgrxClrInputContainerDirective
   ]
 })
 export class ContentAreaModule {}

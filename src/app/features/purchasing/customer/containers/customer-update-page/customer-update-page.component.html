@@ -35,6 +35,42 @@
             >Name Required</clr-control-error
           >
         </clr-input-container>
+        <clr-textarea-container>
+          <label class="clr-col-12 clr-col-md-4">Description</label>
+          <textarea
+            clrTextarea
+            type="text"
+            name="customer_description"
+            [ngrxFormControlState]="
+              (formCustomerState$ | async).controls.description
+            "
+            class="clr-col-12 clr-col-md-8"
+          ></textarea>
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._description?.required"
+            >Required field</clr-control-error
+          >
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._description?.maxLength"
+            >Maximum Character Limit Exceeded</clr-control-error
+          >
+        </clr-textarea-container>
+        <clr-date-container>
+          <label class="clr-col-12 clr-col-md-4">Created date</label>
+          <input
+            clrDate
+            type="date"
+            name="customer_created_date"
+            [ngrxFormControlState]="
+              (formCustomerState$ | async).controls.created_date
+            "
+            class="clr-col-12 clr-col-md-8"
+          />
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._created_date?.required"
+            >Required field</clr-control-error
+          >
+        </clr-date-container>
       </div>
       <div class="card-footer">
         <button

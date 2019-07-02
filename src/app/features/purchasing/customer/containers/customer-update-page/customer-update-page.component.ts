@@ -109,7 +109,9 @@ export class CustomerUpdatePageComponent implements OnInit {
         CUSTOMER_FORM_ID,
         {
           id: customer.id,
-          name: customer.name
+          name: customer.name,
+          description: customer.description,
+          created_date: customer.created_date
         }
       );
 

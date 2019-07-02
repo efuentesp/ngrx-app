@@ -83,6 +83,17 @@
     {
       "id": "C-023",
       "name": "Customer 23"
+    },
+    {
+      "id": "C-024",
+      "name": "Customer 24",
+      "description": "Descripción del Cliente 24"
+    },
+    {
+      "id": "C-025",
+      "name": "Customer 25",
+      "description": "Description Customer 25",
+      "created_date": "30/06/2019"
     }
   ]
 }
