@@ -8,7 +8,16 @@ import { Observable } from "rxjs";
 import { take, map, tap, filter } from "rxjs/operators";
 
 import { RootStoreState, CustomerStoreSelectors } from "src/app/root-store";
-import { FormGroupState, SetValueAction, ResetAction } from "ngrx-forms";
+import {
+  FormGroupState,
+  SetValueAction,
+  ResetAction,
+  MarkAsDirtyAction,
+  SetErrorsAction
+} from "ngrx-forms";
+
+import * as moment from "moment";
+import "moment/locale/es";
 
 import {
   CustomerForm,
@@ -77,5 +86,27 @@ export class CustomerCreatePageComponent implements OnInit {
       )
     );
     this.store$.dispatch(new ResetAction(initialStateCustomerForm.id));
+  }
+
+  onCreatedDateSelected(date: Date) {
+    if (moment(date).isValid()) {
+      this.store$.dispatch(
+        new SetValueAction(
+          "customerForm.created_date",
+          moment(date).format("DD/MM/YYYY")
+        )
+      );
+      this.store$.dispatch(new MarkAsDirtyAction("customerForm.created_date"));
+    } else {
+      this.store$.dispatch(
+        new SetErrorsAction("customerForm.created_date", {
+          invalidDate: true
+        })
+      );
+      this.store$.dispatch(
+        new SetValueAction("customerForm.created_date", null)
+      );
+      this.store$.dispatch(new MarkAsDirtyAction("customerForm.created_date"));
+    }
   }
 }

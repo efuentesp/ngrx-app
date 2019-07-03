@@ -74,7 +74,15 @@ export function customerReducer(
           id: action.payload.id,
           name: action.payload.name,
           description: action.payload.description,
-          created_date: action.payload.created_date
+          email: action.payload.email,
+          created_date: action.payload.created_date,
+          orders_count: action.payload.orders_count,
+          max_quantity: action.payload.max_quantity,
+          max_amount: action.payload.max_amount,
+          type: action.payload.type,
+          country: action.payload.country,
+          enabled: action.payload.enabled,
+          product_types: action.payload.product_types
         }
       );
 

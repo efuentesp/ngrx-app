@@ -80,6 +80,7 @@
               (formCustomerState$ | async).controls.created_date
             "
             class="clr-col-12 clr-col-md-8"
+            (clrDateChange)="onCreatedDateSelected($event)"
           />
           <clr-control-error
             *ngIf="(formCustomerState$ | async).errors._created_date?.required"

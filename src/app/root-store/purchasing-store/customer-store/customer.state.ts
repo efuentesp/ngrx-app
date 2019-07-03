@@ -10,7 +10,10 @@ import {
   minLength,
   maxLength,
   required,
-  requiredTrue
+  requiredTrue,
+  email,
+  greaterThan,
+  lessThan
 } from "ngrx-forms/validation";
 
 export const CUSTOMER_FORM_ID = "customerForm";
@@ -19,7 +22,15 @@ export interface CustomerForm {
   id: string;
   name: string;
   description: string;
+  email: string;
   created_date: Date;
+  orders_count: number;
+  max_quantity: number;
+  max_amount: number;
+  type: string;
+  country: string;
+  enabled: boolean;
+  product_types: string[];
 }
 
 export interface CustomerState extends EntityState<Customer> {
@@ -46,7 +57,15 @@ export const initialStateCustomerForm = createFormGroupState<CustomerForm>(
     id: "",
     name: "",
     description: "",
-    created_date: null
+    email: "",
+    created_date: null,
+    orders_count: 0,
+    max_quantity: 0.0,
+    max_amount: 0.0,
+    type: "",
+    country: "",
+    enabled: true,
+    product_types: []
   }
 );
 
@@ -62,7 +81,15 @@ export const initialState: CustomerState = customerAdapter.getInitialState({
 
 export const validateAndUpdateCustomerForm = updateGroup<CustomerForm>({
   id: validate(required, maxLength(8)),
-  name: validate(required, maxLength(128)),
+  name: validate(required, maxLength(64)),
   description: validate(required, maxLength(128)),
-  created_date: validate(required)
+  email: validate(required, email, maxLength(128)),
+  created_date: validate(required),
+  orders_count: validate(required, greaterThan(0), lessThan(100)),
+  max_quantity: validate(required, greaterThan(0), lessThan(100000)),
+  max_amount: validate(required, greaterThan(0), lessThan(1000000)),
+  type: validate(required),
+  country: validate(required),
+  enabled: validate(required),
+  product_types: validate(required)
 });

@@ -78,22 +78,27 @@
     },
     {
       "id": "C-022",
-      "name": "Customer 22"
+      "name": "Customer 22",
+      "description": "Description Customer 22",
+      "created_date": "22/07/2019"
     },
     {
       "id": "C-023",
-      "name": "Customer 23"
+      "name": "Customer 24",
+      "description": "Descripción del Cliente 24",
+      "created_date": "23/07/2019"
     },
     {
       "id": "C-024",
       "name": "Customer 24",
-      "description": "Descripción del Cliente 24"
+      "description": "Descripción del Cliente 24",
+      "created_date": "24/07/2019"
     },
     {
       "id": "C-025",
-      "name": "Customer 25",
-      "description": "Description Customer 25",
-      "created_date": "30/06/2019"
+      "name": "Cliente 25",
+      "description": "Description Customer 25.",
+      "created_date": "25/07/2019"
     }
   ]
 }

@@ -7,6 +7,9 @@ import { ClrLoadingState } from "@clr/angular";
 import { Observable } from "rxjs";
 import { take, map, tap, filter } from "rxjs/operators";
 
+import * as moment from "moment";
+import "moment/locale/es";
+
 import {
   RootStoreState,
   CustomerStoreSelectors,
@@ -16,7 +19,9 @@ import {
   FormGroupState,
   SetValueAction,
   ResetAction,
-  createFormGroupState
+  createFormGroupState,
+  MarkAsDirtyAction,
+  SetErrorsAction
 } from "ngrx-forms";
 
 import {
@@ -88,7 +93,7 @@ export class CustomerUpdatePageComponent implements OnInit {
     this.formCustomerState$
       .pipe(
         take(1),
-        tap(v => console.log(v.errors)),
+        //tap(v => console.log(v.errors)),
         filter(fs => fs.isValid),
         map(
           fs =>
@@ -102,8 +107,6 @@ export class CustomerUpdatePageComponent implements OnInit {
   }
 
   resetForm() {
-    console.log("CustomerUpdatePageComponent resetForm()");
-
     this.selectedCustomer$.subscribe(customer => {
       const customerUpdateForm = createFormGroupState<CustomerForm>(
         CUSTOMER_FORM_ID,
@@ -111,7 +114,15 @@ export class CustomerUpdatePageComponent implements OnInit {
           id: customer.id,
           name: customer.name,
           description: customer.description,
-          created_date: customer.created_date
+          email: customer.email,
+          created_date: customer.created_date,
+          orders_count: customer.orders_count,
+          max_quantity: customer.max_quantity,
+          max_amount: customer.max_amount,
+          type: customer.type,
+          country: customer.country,
+          enabled: customer.enabled,
+          product_types: customer.product_types
         }
       );
 
@@ -120,5 +131,28 @@ export class CustomerUpdatePageComponent implements OnInit {
       );
       this.store$.dispatch(new ResetAction(customerUpdateForm.id));
     });
+  }
+
+  onCreatedDateSelected(date: Date) {
+    console.log(date);
+    if (moment(date).isValid()) {
+      this.store$.dispatch(
+        new SetValueAction(
+          "customerForm.created_date",
+          moment(date).format("DD/MM/YYYY")
+        )
+      );
+      this.store$.dispatch(new MarkAsDirtyAction("customerForm.created_date"));
+    } else {
+      this.store$.dispatch(
+        new SetErrorsAction("customerForm.created_date", {
+          invalidDate: true
+        })
+      );
+      this.store$.dispatch(
+        new SetValueAction("customerForm.created_date", null)
+      );
+      this.store$.dispatch(new MarkAsDirtyAction("customerForm.created_date"));
+    }
   }
 }
