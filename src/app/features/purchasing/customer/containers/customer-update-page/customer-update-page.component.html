@@ -20,8 +20,54 @@
               clrInput
               [ngrxFormControlState]="(formCustomerState$ | async).controls.id"
             />
-            <clr-control-error>Required field</clr-control-error>
+            <clr-control-error
+              *clrIfError="(formCustomerState$ | async).errors._id?.required"
+              >Required field</clr-control-error
+            >
           </clr-input-container>
+
+          <div class="clr-form-control">
+            <label for="icon-group" class="clr-control-label"
+              >Customer related</label
+            >
+            <div class="clr-control-container">
+              <div class="clr-input-wrapper">
+                <div
+                  class="clr-input-group"
+                  [ngClass]="{ 'clr-focus': focusInputGroup }"
+                >
+                  <input
+                    type="hidden"
+                    id="customer_id"
+                    class="clr-input"
+                    [ngrxFormControlState]="
+                      (formCustomerState$ | async).controls.customer_id
+                    "
+                  />
+                  <input
+                    type="text"
+                    id="customer_id_tostring"
+                    placeholder="Select a Customer"
+                    class="clr-input"
+                    (focus)="focusInputGroup = true"
+                    (blur)="focusInputGroup = false"
+                    disabled="true"
+                  />
+                  <button
+                    class="clr-input-group-icon-action ng-star-inserted"
+                    type="button"
+                    (click)="onClickSearchCustomer()"
+                  >
+                    <clr-icon shape="search"></clr-icon>
+                  </button>
+                </div>
+                <clr-icon
+                  class="clr-validate-icon"
+                  shape="exclamation-circle"
+                ></clr-icon>
+              </div>
+            </div>
+          </div>
 
           <clr-input-container>
             <label>Name</label>
@@ -89,6 +135,7 @@
               clrDate
               type="date"
               name="customer_created_date"
+              placeholder="Select a date"
               [ngrxFormControlState]="
                 (formCustomerState$ | async).controls.created_date
               "
@@ -320,3 +367,10 @@
     </div>
   </form>
 </app-page>
+
+<app-customer-select-dialog
+  title="Select Customer"
+  [isDialogVisible]="this.isShowingSelectCustomerDialog"
+  (onClickSelect)="this.onClickSelectCustomer()"
+  (onClickCancel)="this.onClickCancel()"
+></app-customer-select-dialog>

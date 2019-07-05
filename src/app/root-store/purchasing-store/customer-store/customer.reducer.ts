@@ -74,6 +74,7 @@ export function customerReducer(
         {
           id: action.payload.id,
           name: action.payload.name,
+          customer_id: action.payload.customer_id,
           description: action.payload.description,
           email: action.payload.email,
           created_date: action.payload.created_date,

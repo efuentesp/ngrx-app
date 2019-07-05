@@ -21,6 +21,7 @@ export const CUSTOMER_FORM_ID = "customerForm";
 export interface CustomerForm {
   id: string;
   name: string;
+  customer_id: string;
   description: string;
   email: string;
   created_date: Date;
@@ -56,6 +57,7 @@ export const initialStateCustomerForm = createFormGroupState<CustomerForm>(
   {
     id: "",
     name: "",
+    customer_id: null,
     description: "",
     email: "",
     created_date: null,
@@ -82,6 +84,7 @@ export const initialState: CustomerState = customerAdapter.getInitialState({
 export const validateAndUpdateCustomerForm = updateGroup<CustomerForm>({
   id: validate(required, maxLength(8)),
   name: validate(required, maxLength(64)),
+  customer_id: validate(required),
   description: validate(required, maxLength(128)),
   email: validate(required, email, maxLength(128)),
   created_date: validate(required),

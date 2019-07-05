@@ -51,6 +51,8 @@ export class CustomerUpdatePageComponent implements OnInit {
   customerId: string;
   selectedCustomer$: Observable<Customer>;
 
+  isShowingSelectCustomerDialog: boolean = false;
+
   constructor(
     private store$: Store<RootStoreState.State>,
     private router: Router,
@@ -113,6 +115,7 @@ export class CustomerUpdatePageComponent implements OnInit {
         {
           id: customer.id,
           name: customer.name,
+          customer_id: customer.customer_id,
           description: customer.description,
           email: customer.email,
           created_date: customer.created_date,
@@ -154,5 +157,20 @@ export class CustomerUpdatePageComponent implements OnInit {
       );
       this.store$.dispatch(new MarkAsDirtyAction("customerForm.created_date"));
     }
+  }
+
+  onClickSearchCustomer() {
+    console.log("onClickSearchCustomer()");
+    this.isShowingSelectCustomerDialog = true;
+  }
+
+  onClickSelectCustomer() {
+    console.log("onClickSelectCustomer()");
+    this.isShowingSelectCustomerDialog = false;
+  }
+
+  onClickCancel() {
+    console.log("onClickCancel()");
+    this.isShowingSelectCustomerDialog = false;
   }
 }
