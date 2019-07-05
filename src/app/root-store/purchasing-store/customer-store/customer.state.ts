@@ -65,7 +65,7 @@ export const initialStateCustomerForm = createFormGroupState<CustomerForm>(
     type: "",
     country: "",
     enabled: true,
-    product_types: []
+    product_types: null
   }
 );
 

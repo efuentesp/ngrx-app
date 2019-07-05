@@ -98,7 +98,15 @@
       "id": "C-025",
       "name": "Cliente 25",
       "description": "Description Customer 25.",
-      "created_date": "25/07/2019"
+      "email": "cliente@mail.mx",
+      "created_date": "25/07/2019",
+      "orders_count": "1",
+      "max_quantity": "100",
+      "max_amount": "1000",
+      "type": "Vip",
+      "country": "two",
+      "enabled": true,
+      "product_types": false
     }
   ]
 }

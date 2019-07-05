@@ -8,49 +8,35 @@
     clrLayout="vertical"
     [ngrxFormState]="formCustomerState$ | async"
     (submit)="submit()"
+    autocomplete="off"
   >
     <div class="card">
       <div class="card-block">
         <clr-input-container>
-          <label class="clr-col-12 clr-col-md-4">ID</label>
+          <label>ID</label>
           <input
-            clrInput
             type="text"
-            name="customer_id"
+            clrInput
             [ngrxFormControlState]="(formCustomerState$ | async).controls.id"
-            class="clr-col-12 clr-col-md-8"
           />
-          <clr-control-error
-            *ngIf="(formCustomerState$ | async).errors._id?.required"
-            >Required field</clr-control-error
-          >
-          <clr-control-error
-            *ngIf="(formCustomerState$ | async).errors._id?.maxLength"
-            >Maximum Character Limit Exceeded</clr-control-error
-          >
+          <clr-control-error>Required field</clr-control-error>
         </clr-input-container>
 
         <clr-input-container>
-          <label class="clr-col-12 clr-col-md-4">Name</label>
+          <label>Name</label>
           <input
-            clrInput
             type="text"
-            name="customer_name"
+            clrInput
             [ngrxFormControlState]="(formCustomerState$ | async).controls.name"
-            class="clr-col-12 clr-col-md-8"
           />
           <clr-control-error
-            *ngIf="(formCustomerState$ | async).errors._name?.required"
-            >Required field</clr-control-error
-          >
-          <clr-control-error
-            *ngIf="(formCustomerState$ | async).errors._name?.maxLength"
-            >Maximum Character Limit Exceeded</clr-control-error
+            *clrIfError="(formCustomerState$ | async).errors._name?.required"
+            >Requiered field</clr-control-error
           >
         </clr-input-container>
 
         <clr-textarea-container>
-          <label class="clr-col-12 clr-col-md-4">Description</label>
+          <label>Description</label>
           <textarea
             clrTextarea
             type="text"
@@ -58,7 +44,6 @@
             [ngrxFormControlState]="
               (formCustomerState$ | async).controls.description
             "
-            class="clr-col-12 clr-col-md-8"
           ></textarea>
           <clr-control-error
             *ngIf="(formCustomerState$ | async).errors._description?.required"
@@ -70,8 +55,29 @@
           >
         </clr-textarea-container>
 
+        <clr-input-container>
+          <label>Email</label>
+          <input
+            type="email"
+            clrInput
+            [ngrxFormControlState]="(formCustomerState$ | async).controls.email"
+          />
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._email?.required"
+            >Required field</clr-control-error
+          >
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._email?.email"
+            >Invalid email</clr-control-error
+          >
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._email?.maxLength"
+            >Maximum Character Limit Exceeded</clr-control-error
+          >
+        </clr-input-container>
+
         <clr-date-container>
-          <label class="clr-col-12 clr-col-md-4">Created date</label>
+          <label>Created date</label>
           <input
             clrDate
             type="date"
@@ -79,7 +85,6 @@
             [ngrxFormControlState]="
               (formCustomerState$ | async).controls.created_date
             "
-            class="clr-col-12 clr-col-md-8"
             (clrDateChange)="onCreatedDateSelected($event)"
           />
           <clr-control-error
@@ -88,11 +93,186 @@
           >
         </clr-date-container>
 
-        <!-- <ngrx-input
-          name="customer_id"
-          label="ID"
-          [ngrxFormControlState]="(formCustomerState$ | async).controls.name"
-        ></ngrx-input> -->
+        <clr-input-container>
+          <label>Orders count</label>
+          <input
+            type="text"
+            clrInput
+            [ngrxFormControlState]="
+              (formCustomerState$ | async).controls.orders_count
+            "
+          />
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._orders_count?.required"
+            >Required field</clr-control-error
+          >
+          <clr-control-error
+            *ngIf="
+              (formCustomerState$ | async).errors._orders_count?.greaterThan
+            "
+            >Value must be greater than
+            {{
+              (formCustomerState$ | async).errors._orders_count?.greaterThan
+                .comparand
+            }}</clr-control-error
+          >
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._orders_count?.lessThan"
+            >Value must be less than
+            {{
+              (formCustomerState$ | async).errors._orders_count?.lessThan
+                .comparand
+            }}</clr-control-error
+          >
+        </clr-input-container>
+
+        <clr-input-container>
+          <label>Max quantity</label>
+          <input
+            type="text"
+            clrInput
+            [ngrxFormControlState]="
+              (formCustomerState$ | async).controls.max_quantity
+            "
+          />
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._max_quantity?.required"
+            >Required field</clr-control-error
+          >
+          <clr-control-error
+            *ngIf="
+              (formCustomerState$ | async).errors._max_quantity?.greaterThan
+            "
+            >Value must be greater than
+            {{
+              (formCustomerState$ | async).errors._max_quantity?.greaterThan
+                .comparand
+            }}</clr-control-error
+          >
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._max_quantity?.lessThan"
+            >Value must be less than
+            {{
+              (formCustomerState$ | async).errors._max_quantity?.lessThan
+                .comparand
+            }}</clr-control-error
+          >
+        </clr-input-container>
+
+        <clr-radio-container>
+          <label>Type</label>
+          <clr-radio-wrapper>
+            <input
+              type="radio"
+              clrRadio
+              name="type"
+              value="Regular"
+              [ngrxFormControlState]="
+                (formCustomerState$ | async).controls.type
+              "
+            />
+            <label>Normal</label>
+          </clr-radio-wrapper>
+          <clr-radio-wrapper>
+            <input
+              type="radio"
+              clrRadio
+              name="type"
+              value="Vip"
+              [ngrxFormControlState]="
+                (formCustomerState$ | async).controls.type
+              "
+            />
+            <label>VIP</label>
+          </clr-radio-wrapper>
+          <clr-control-error>Required field</clr-control-error>
+        </clr-radio-container>
+
+        <clr-select-container>
+          <label>Country</label>
+          <select
+            clrSelect
+            name="country"
+            [ngrxFormControlState]="
+              (formCustomerState$ | async).controls.country
+            "
+          >
+            <option value="one">One</option>
+            <option value="two">Two</option>
+            <option value="three">Three</option>
+          </select>
+          <clr-control-error>Required field</clr-control-error>
+        </clr-select-container>
+
+        <clr-toggle-container>
+          <clr-toggle-wrapper>
+            <input
+              type="checkbox"
+              clrToggle
+              name="enabled"
+              value="enabled"
+              [ngrxFormControlState]="
+                (formCustomerState$ | async).controls.enabled
+              "
+            />
+            <label>Enabled</label>
+          </clr-toggle-wrapper>
+          <clr-control-error>Required field</clr-control-error>
+        </clr-toggle-container>
+
+        <clr-checkbox-container>
+          <label>Product types</label>
+          <clr-checkbox-wrapper>
+            <input
+              type="checkbox"
+              clrCheckbox
+              name="product_types"
+              value="product01"
+            />
+            <label>Product 1</label>
+          </clr-checkbox-wrapper>
+          <clr-checkbox-wrapper>
+            <input
+              type="checkbox"
+              clrCheckbox
+              name="product_types"
+              value="product02"
+            />
+            <label>Product 2</label>
+          </clr-checkbox-wrapper>
+          <clr-control-error>Required field</clr-control-error>
+        </clr-checkbox-container>
+
+        <clr-input-container>
+          <label>Max amount</label>
+          <input
+            type="text"
+            clrInput
+            [ngrxFormControlState]="
+              (formCustomerState$ | async).controls.max_amount
+            "
+          />
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._max_amount?.required"
+            >Required field</clr-control-error
+          >
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._max_amount?.greaterThan"
+            >Value must be greater than
+            {{
+              (formCustomerState$ | async).errors._max_amount?.greaterThan
+                .comparand
+            }}</clr-control-error
+          >
+          <clr-control-error
+            *ngIf="(formCustomerState$ | async).errors._max_amount?.lessThan"
+            >Value must be less than
+            {{
+              (formCustomerState$ | async).errors._max_amount?.lessThan
+                .comparand
+            }}</clr-control-error
+          >
+        </clr-input-container>
       </div>
       <div class="card-footer">
         <button
