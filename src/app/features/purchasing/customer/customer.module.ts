@@ -17,7 +17,7 @@ import { CustomerCreatePageComponent } from "./containers/customer-create-page/c
 import { CustomerUpdatePageComponent } from "./containers/customer-update-page/customer-update-page.component";
 
 import { CustomerSearchComponent } from "./components/customer-search/customer-search.component";
-import { CustomerSelectDialogComponent } from './components/customer-select-dialog/customer-select-dialog.component';
+import { CustomerSelectDialogComponent } from "./containers/customer-select-dialog/customer-select-dialog.component";
 
 @NgModule({
   declarations: [

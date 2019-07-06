@@ -19,7 +19,9 @@ export class CustomerSearchComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("CustomerSearchComponent ngOnInit()");
+  }
 
   _onEditCustomer(customer: Customer) {
     //console.log("Edit Customer:", customer);

@@ -1,0 +1,21 @@
+<clr-modal [(clrModalOpen)]="isDialogVisible" [clrModalSize]="'xl'">
+  <h3 class="modal-title">{{ title }}</h3>
+  <div class="modal-body">
+    <p>Modal</p>
+    <app-customer-search
+      [customerItems]="customerItems$ | async"
+      [isLoading]="isLoading$ | async"
+      [createAction]="false"
+      [editAction]="false"
+      [deleteAction]="false"
+    ></app-customer-search>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="_onClickCancel()">
+      Cancel
+    </button>
+    <button type="button" class="btn btn-primary" (click)="_onClickSelect()">
+      Select
+    </button>
+  </div>
+</clr-modal>
