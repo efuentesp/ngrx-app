@@ -49,9 +49,12 @@ export class CustomerUpdatePageComponent implements OnInit {
   submitBtnState$: Observable<ClrLoadingState>;
 
   customerId: string;
-  selectedCustomer$: Observable<Customer>;
+  customerToEdit$: Observable<Customer>;
 
   isShowingSelectCustomerDialog: boolean = false;
+
+  selectedCustomerIdOnDialog: Customer = null;
+  customerSelected$: Observable<Customer>;
 
   constructor(
     private store$: Store<RootStoreState.State>,
@@ -82,7 +85,7 @@ export class CustomerUpdatePageComponent implements OnInit {
       CustomerStoreSelectors.selectClrLoadingState
     );
 
-    this.selectedCustomer$ = this.store$.select(
+    this.customerToEdit$ = this.store$.select(
       CustomerStoreSelectors.selectCustomerById(this.customerId)
     );
 
@@ -109,7 +112,7 @@ export class CustomerUpdatePageComponent implements OnInit {
   }
 
   resetForm() {
-    this.selectedCustomer$.subscribe(customer => {
+    this.customerToEdit$.subscribe(customer => {
       const customerUpdateForm = createFormGroupState<CustomerForm>(
         CUSTOMER_FORM_ID,
         {
@@ -137,7 +140,7 @@ export class CustomerUpdatePageComponent implements OnInit {
   }
 
   onCreatedDateSelected(date: Date) {
-    console.log(date);
+    // console.log(date);
     if (moment(date).isValid()) {
       this.store$.dispatch(
         new SetValueAction(
@@ -160,17 +163,27 @@ export class CustomerUpdatePageComponent implements OnInit {
   }
 
   onClickSearchCustomer() {
-    console.log("onClickSearchCustomer()");
+    // console.log("CustomerUpdatePageComponent onClickSearchCustomer()");
     this.isShowingSelectCustomerDialog = true;
   }
 
-  onClickSelectCustomer() {
-    console.log("onClickSelectCustomer()");
+  onClickSelectCustomer(customer: Customer) {
+    console.log(
+      "CustomerUpdatePageComponent onClickSelectCustomer()",
+      customer
+    );
+
+    this.store$.dispatch(
+      new SetValueAction("customerForm.customer_id", customer.id)
+    );
+    this.store$.dispatch(new MarkAsDirtyAction("customerForm.customer_id"));
+    this.selectedCustomerIdOnDialog = customer;
+
     this.isShowingSelectCustomerDialog = false;
   }
 
   onClickCancel() {
-    console.log("onClickCancel()");
+    // console.log("CustomerUpdatePageComponent onClickCancel()");
     this.isShowingSelectCustomerDialog = false;
   }
 }

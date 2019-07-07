@@ -49,9 +49,8 @@
                     id="customer_id_tostring"
                     placeholder="Select a Customer"
                     class="clr-input"
-                    (focus)="focusInputGroup = true"
-                    (blur)="focusInputGroup = false"
                     disabled="true"
+                    value="{{ selectedCustomerIdOnDialog?.id }}"
                   />
                   <button
                     class="clr-input-group-icon-action ng-star-inserted"
@@ -371,6 +370,6 @@
 <app-customer-select-dialog
   title="Select Customer"
   [isDialogVisible]="this.isShowingSelectCustomerDialog"
-  (onClickSelect)="this.onClickSelectCustomer()"
+  (onClickSelect)="this.onClickSelectCustomer($event)"
   (onClickCancel)="this.onClickCancel()"
 ></app-customer-select-dialog>

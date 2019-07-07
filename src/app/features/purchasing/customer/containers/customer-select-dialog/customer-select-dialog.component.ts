@@ -12,7 +12,7 @@ import {
 @Component({
   selector: "app-customer-select-dialog",
   templateUrl: "./customer-select-dialog.component.html",
-  styleUrls: ["./customer-select-dialog.component.css"]
+  styleUrls: ["./customer-select-dialog.component.scss"]
 })
 export class CustomerSelectDialogComponent implements OnInit {
   @Input() title: string = "";
@@ -24,6 +24,8 @@ export class CustomerSelectDialogComponent implements OnInit {
   customerItems$: Observable<Customer[]>;
   error$: Observable<string>;
   isLoading$: Observable<boolean>;
+
+  selectedCustomer: Customer = null;
 
   constructor(private store$: Store<RootStoreState.State>) {}
 
@@ -44,8 +46,13 @@ export class CustomerSelectDialogComponent implements OnInit {
     this.store$.dispatch(new CustomerStoreActions.FindAllRequest());
   }
 
+  _onSelectionChanged(customer: Customer) {
+    // console.log("CustomerSelectDialogComponent _onSelectionChanged()", customer);
+    this.selectedCustomer = customer;
+  }
+
   _onClickSelect() {
-    this.onClickSelect.emit();
+    this.onClickSelect.emit(this.selectedCustomer);
   }
 
   _onClickCancel() {

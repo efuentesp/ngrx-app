@@ -1,4 +1,4 @@
-<clr-datagrid [clrDgLoading]="isLoading">
+<clr-datagrid [clrDgLoading]="isLoading" *ngIf="!singleSelectAction">
   <clr-dg-placeholder>No records available.</clr-dg-placeholder>
 
   <clr-dg-action-bar *ngIf="createAction">
@@ -36,6 +36,36 @@
         <clr-icon shape="trash"></clr-icon> Delete
       </button>
     </clr-dg-action-overflow>
+    <clr-dg-cell>{{ customer.id }}</clr-dg-cell>
+    <clr-dg-cell>{{ customer.name }}</clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]"
+        >Records per page</clr-dg-page-size
+      >
+      {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
+      {{ pagination.totalItems }} records
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<clr-datagrid
+  [clrDgLoading]="isLoading"
+  [(clrDgSingleSelected)]="selectedCustomer"
+  [clrDgRowSelection]="true"
+  (clrDgSingleSelectedChange)="_onSelectionChanged($event)"
+  *ngIf="singleSelectAction && showInDialog"
+>
+  <clr-dg-placeholder>No records available.</clr-dg-placeholder>
+
+  <clr-dg-column [clrDgField]="'id'">ID</clr-dg-column>
+  <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
+
+  <clr-dg-row
+    *clrDgItems="let customer of customerItems"
+    [clrDgItem]="customer"
+  >
     <clr-dg-cell>{{ customer.id }}</clr-dg-cell>
     <clr-dg-cell>{{ customer.name }}</clr-dg-cell>
   </clr-dg-row>

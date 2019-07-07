@@ -14,7 +14,7 @@ import { Customer } from "../../customer.model";
 @Component({
   selector: "app-customer-search-page",
   templateUrl: "./customer-search-page.component.html",
-  styleUrls: ["./customer-search-page.component.css"]
+  styleUrls: ["./customer-search-page.component.scss"]
 })
 export class CustomerSearchPageComponent implements OnInit {
   customerItems$: Observable<Customer[]>;

@@ -8,6 +8,9 @@
       [createAction]="false"
       [editAction]="false"
       [deleteAction]="false"
+      [singleSelectAction]="true"
+      [showInDialog]="isDialogVisible"
+      (onSelectionChanged)="_onSelectionChanged($event)"
     ></app-customer-search>
   </div>
   <div class="modal-footer">
