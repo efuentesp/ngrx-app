@@ -27,7 +27,7 @@ export class CustomerSelectDialogComponent implements OnInit {
 
   selectedCustomer: Customer = null;
 
-  constructor(private store$: Store<RootStoreState.State>) {}
+  constructor(private store$: Store<RootStoreState.AppState>) {}
 
   ngOnInit() {
     console.log("CustomerSelectDialogComponent ngOnInit()");

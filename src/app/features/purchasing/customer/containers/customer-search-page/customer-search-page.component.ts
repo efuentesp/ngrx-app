@@ -26,7 +26,7 @@ export class CustomerSearchPageComponent implements OnInit {
   selectedCustomer: Customer = null;
 
   constructor(
-    private store$: Store<RootStoreState.State>,
+    private store$: Store<RootStoreState.AppState>,
     private router: Router
   ) {}
 

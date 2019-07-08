@@ -41,7 +41,7 @@ export class CustomerCreatePageComponent implements OnInit {
   isSubmitting$: Observable<boolean>;
   submitBtnState$: Observable<ClrLoadingState>;
 
-  constructor(private store$: Store<RootStoreState.State>) {
+  constructor(private store$: Store<RootStoreState.AppState>) {
     this.error$ = this.store$.select(
       CustomerStoreSelectors.selectCustomerError
     );

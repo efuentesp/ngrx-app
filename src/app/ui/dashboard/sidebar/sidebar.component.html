@@ -1,16 +1,16 @@
-<nav>
-  <section class="sidenav-content">
-    <a routerLink="/" class="nav-link active">Inicio</a>
-    <section class="nav-group collapsible">
-      <input id="purchasing" type="checkbox" />
-      <label for="purchasing">Purchasing</label>
-      <ul class="nav-list">
-        <li>
-          <a routerLink="/purchasing/customer/search" class="nav-link"
-            >Search Customer</a
-          >
-        </li>
-      </ul>
-    </section>
-  </section>
-</nav>
+<clr-vertical-nav [clrVerticalNavCollapsible]="true">
+  <a clrVerticalNavLink routerLink="/" routerLinkActive="active">
+    <clr-icon clrVerticalNavIcon shape="home"></clr-icon>
+    Inicio
+  </a>
+  <clr-vertical-nav-group>
+    <clr-icon shape="folder" clrVerticalNavIcon></clr-icon>
+    Purchasing
+    <clr-vertical-nav-group-children>
+      <a clrVerticalNavLink routerLink="/purchasing/customer/search">
+        <clr-icon shape="bolt" clrVerticalNavIcon></clr-icon>
+        Search Customer
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+</clr-vertical-nav>

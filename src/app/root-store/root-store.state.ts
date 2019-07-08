@@ -1,5 +1,7 @@
 import { CustomerStoreState } from "./purchasing-store/customer-store";
+import { RouterReducerState } from "@ngrx/router-store";
 
-export interface State {
+export interface AppState {
+  router: RouterReducerState<any>;
   customer: CustomerStoreState.CustomerState;
 }

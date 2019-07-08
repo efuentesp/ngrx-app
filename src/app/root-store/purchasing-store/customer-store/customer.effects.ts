@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { Action } from "@ngrx/store";
+import { Action, Store } from "@ngrx/store";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { of, Observable } from "rxjs";
 import {
@@ -12,17 +12,21 @@ import {
   catchError,
   tap,
   delay,
-  withLatestFrom
+  withLatestFrom,
+  exhaustMap
 } from "rxjs/operators";
 
 import { Customer } from "src/app/features/purchasing/customer/customer.model";
 import { CustomerService } from "src/app/features/purchasing/customer/customer.service";
 
 import * as CustomerActions from "./customer.actions";
+import { RootStoreState } from "src/app/root-store";
+import { selectAllCustomerItems } from "./customer.selectors";
 
 @Injectable()
 export class CustomerStoreEffects {
   constructor(
+    private store$: Store<RootStoreState.AppState>,
     private actions$: Actions,
     private customerService: CustomerService,
     private router: Router
@@ -41,6 +45,22 @@ export class CustomerStoreEffects {
       )
     )
   );
+
+  // @Effect()
+  // findAllRequestEffect$: Observable<Action> = this.actions$.pipe(
+  //   ofType(CustomerActions.CustomerActionTypes.FindAllRequest),
+  //   withLatestFrom(this.store$.select(selectAllCustomerItems)),
+  //   filter(([_, loaded]) => !loaded),
+  //   exhaustMap(() =>
+  //     this.customerService.findAll("").pipe(
+  //       map(
+  //         (customerItems: Customer[]) =>
+  //           new CustomerActions.FindAllSuccess(customerItems)
+  //       ),
+  //       catchError(error => of(new CustomerActions.FindAllFailure(error)))
+  //     )
+  //   )
+  // );
 
   @Effect()
   findOneRequestEffect$: Observable<Action> = this.actions$.pipe(

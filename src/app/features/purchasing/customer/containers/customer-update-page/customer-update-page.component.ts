@@ -57,7 +57,7 @@ export class CustomerUpdatePageComponent implements OnInit {
   customerSelected$: Observable<Customer>;
 
   constructor(
-    private store$: Store<RootStoreState.State>,
+    private store$: Store<RootStoreState.AppState>,
     private router: Router,
     private route: ActivatedRoute
   ) {
