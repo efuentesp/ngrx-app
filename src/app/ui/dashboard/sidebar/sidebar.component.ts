@@ -17,16 +17,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     this.selectUrl$ = this.store$.select(selectUrl);
 
-    this.selectUrl$.subscribe(url => console.log(url));
+    //this.selectUrl$.subscribe(url => console.log(url));
   }
-
-  // private isActivePath(pathName: string): string {
-  //   return this.selectUrl$.subscribe(url => {
-  //     if (url == pathName) {
-  //       return "active";
-  //     } else {
-  //       return "inactive";
-  //     }
-  //   });
-  // }
 }

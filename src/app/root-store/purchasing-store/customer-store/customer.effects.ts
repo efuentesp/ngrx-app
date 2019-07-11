@@ -26,7 +26,6 @@ import { selectAllCustomerItems } from "./customer.selectors";
 @Injectable()
 export class CustomerStoreEffects {
   constructor(
-    private store$: Store<RootStoreState.AppState>,
     private actions$: Actions,
     private customerService: CustomerService,
     private router: Router
@@ -37,6 +36,23 @@ export class CustomerStoreEffects {
     ofType(CustomerActions.CustomerActionTypes.FindAllRequest),
     switchMap((action: CustomerActions.FindAllRequest) =>
       this.customerService.findAll("").pipe(
+        map((customerItems: Customer[]) => {
+          const customerItemsEnriched = customerItems.map(
+            (customer: Customer) => {
+              if (customer.customer_id) {
+                this.customerService
+                  .findOne(customer.customer_id)
+                  .subscribe((customer_id: Customer) => {
+                    customer.customer_rel = customer_id;
+                  });
+              }
+              return customer;
+              //console.log(customer);
+            }
+          );
+          //console.log(customerItemsEnriched);
+          return customerItemsEnriched;
+        }),
         map(
           (customerItems: Customer[]) =>
             new CustomerActions.FindAllSuccess(customerItems)
@@ -67,6 +83,17 @@ export class CustomerStoreEffects {
     ofType(CustomerActions.CustomerActionTypes.FindOneRequest),
     switchMap((action: CustomerActions.FindOneRequest) =>
       this.customerService.findOne(action.payload.id).pipe(
+        map((customer: Customer) => {
+          if (customer.customer_id) {
+            this.customerService
+              .findOne(customer.customer_id)
+              .subscribe((customer_id: Customer) => {
+                customer.customer_rel = customer_id;
+              });
+          }
+          //console.log(customer);
+          return customer;
+        }),
         map(
           (customer: Customer) => new CustomerActions.FindOneSuccess(customer)
         ),

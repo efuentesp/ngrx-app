@@ -97,7 +97,7 @@
     {
       "id": "C-025",
       "name": "Cliente 25",
-      "customer_id": "C-023",
+      "customer_id": "C-001",
       "description": "Description Customer 25.",
       "email": "cliente@mail.mx",
       "created_date": "25/07/2019",

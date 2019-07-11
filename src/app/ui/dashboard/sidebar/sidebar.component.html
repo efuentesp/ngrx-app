@@ -1,5 +1,9 @@
 <clr-vertical-nav [clrVerticalNavCollapsible]="true">
-  <a clrVerticalNavLink routerLink="/" routerLinkActive="active">
+  <a
+    clrVerticalNavLink
+    routerLink="/"
+    routerLinkActive="'active' ? (selectUrl$ | async) == '/' "
+  >
     <clr-icon clrVerticalNavIcon shape="home"></clr-icon>
     Inicio
   </a>
