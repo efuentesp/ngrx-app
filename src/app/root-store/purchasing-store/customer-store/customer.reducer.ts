@@ -17,6 +17,7 @@ import {
 } from "./customer.state";
 
 import { CustomerActions, CustomerActionTypes } from "./customer.actions";
+import { Customer } from "src/app/features/purchasing/customer/customer.model";
 
 const customerFormReducer = createFormStateReducerWithUpdate<CustomerForm>(
   validateAndUpdateCustomerForm
@@ -69,12 +70,15 @@ export function customerReducer(
         error: null
       };
     case CustomerActionTypes.FindOneSuccess:
+      const customer: Customer = action.payload;
+      console.log(customer);
       const customerUpdateForm = createFormGroupState<CustomerForm>(
         CUSTOMER_FORM_ID,
         {
           id: action.payload.id,
           name: action.payload.name,
           customer_id: action.payload.customer_id,
+          customer_txt: customer.customer_id,
           description: action.payload.description,
           email: action.payload.email,
           created_date: action.payload.created_date,

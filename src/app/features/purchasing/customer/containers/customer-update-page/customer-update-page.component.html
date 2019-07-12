@@ -50,7 +50,9 @@
                     placeholder="Select a Customer"
                     class="clr-input"
                     disabled="true"
-                    value="{{ selectedCustomerIdOnDialog?.id }}"
+                    [ngrxFormControlState]="
+                      (formCustomerState$ | async).controls.customer_txt
+                    "
                   />
                   <button
                     class="clr-input-group-icon-action ng-star-inserted"

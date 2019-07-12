@@ -18,7 +18,7 @@ export class CustomerService {
   }
 
   findAll(query: string): Observable<Customer[]> {
-    console.log("Service: findAll()");
+    //console.log("Service: findAll()");
     let queryUrl = "";
     if (query) {
       queryUrl = `${this.url}/customer?${query}`;
@@ -30,7 +30,7 @@ export class CustomerService {
   }
 
   findOne(id: string): Observable<Customer> {
-    console.log(`Service: findOne(${id})`);
+    //console.log(`Service: findOne(${id})`);
     let queryUrl = `${this.url}/customer/${id}`;
 
     return this.http.get<Customer>(queryUrl);

@@ -2,7 +2,7 @@ export interface Customer {
   id: string;
   name: string;
   customer_id: string;
-  customer_rel: Customer;
+  customer_rel?: Customer;
   description: string;
   email: string;
   created_date: Date;

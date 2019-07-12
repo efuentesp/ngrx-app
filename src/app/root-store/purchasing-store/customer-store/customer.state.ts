@@ -22,6 +22,7 @@ export interface CustomerForm {
   id: string;
   name: string;
   customer_id: string;
+  customer_txt: string;
   description: string;
   email: string;
   created_date: Date;
@@ -58,6 +59,7 @@ export const initialStateCustomerForm = createFormGroupState<CustomerForm>(
     id: "",
     name: "",
     customer_id: null,
+    customer_txt: "",
     description: "",
     email: "",
     created_date: null,
@@ -85,6 +87,7 @@ export const validateAndUpdateCustomerForm = updateGroup<CustomerForm>({
   id: validate(required, maxLength(8)),
   name: validate(required, maxLength(64)),
   customer_id: validate(required),
+  customer_txt: validate(required),
   description: validate(required, maxLength(128)),
   email: validate(required, email, maxLength(128)),
   created_date: validate(required),
@@ -93,6 +96,6 @@ export const validateAndUpdateCustomerForm = updateGroup<CustomerForm>({
   max_amount: validate(required, greaterThan(0), lessThan(1000000)),
   type: validate(required),
   country: validate(required),
-  enabled: validate(required),
-  product_types: validate(required)
+  enabled: validate(required)
+  //product_types: validate(required)
 });

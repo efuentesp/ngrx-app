@@ -30,7 +30,7 @@ export class CustomerSelectDialogComponent implements OnInit {
   constructor(private store$: Store<RootStoreState.AppState>) {}
 
   ngOnInit() {
-    console.log("CustomerSelectDialogComponent ngOnInit()");
+    //console.log("CustomerSelectDialogComponent ngOnInit()");
     this.customerItems$ = this.store$.select(
       CustomerStoreSelectors.selectAllCustomerItems
     );

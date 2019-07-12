@@ -42,19 +42,18 @@ import { Customer } from "../../customer.model";
 })
 export class CustomerUpdatePageComponent implements OnInit {
   error$: Observable<string>;
-  formCustomerState$: Observable<FormGroupState<CustomerForm>>;
-  submittedValues$: Observable<CustomerForm | undefined>;
-
   isLoading$: Observable<boolean>;
   submitBtnState$: Observable<ClrLoadingState>;
 
+  // submittedValues$: Observable<CustomerForm | undefined>;
+
   customerId: string;
-  customerToEdit$: Observable<Customer>;
+  customerToEdit$: Observable<Customer> = null;
+  formCustomerState$: Observable<FormGroupState<CustomerForm>>;
 
   isShowingSelectCustomerDialog: boolean = false;
-
-  selectedCustomerIdOnDialog: Customer = null;
-  customerSelected$: Observable<Customer>;
+  //selectedCustomerIdOnDialog: Customer = null;
+  //customerSelected$: Observable<Customer>;
 
   constructor(
     private store$: Store<RootStoreState.AppState>,
@@ -67,9 +66,9 @@ export class CustomerUpdatePageComponent implements OnInit {
     this.formCustomerState$ = store$.pipe(
       select(s => s.customer.customerForm.formState)
     );
-    this.submittedValues$ = store$.pipe(
-      select(s => s.customer.customerForm.submittedValues)
-    );
+    // this.submittedValues$ = store$.pipe(
+    //   select(s => s.customer.customerForm.submittedValues)
+    // );
   }
 
   ngOnInit() {
@@ -85,12 +84,12 @@ export class CustomerUpdatePageComponent implements OnInit {
       CustomerStoreSelectors.selectClrLoadingState
     );
 
-    this.customerToEdit$ = this.store$.select(
-      CustomerStoreSelectors.selectCustomerById(this.customerId)
-    );
-
     this.store$.dispatch(
       new CustomerStoreActions.FindOneRequest({ id: this.customerId })
+    );
+
+    this.customerToEdit$ = this.store$.select(
+      CustomerStoreSelectors.selectCustomerById(this.customerId)
     );
   }
 
@@ -119,6 +118,7 @@ export class CustomerUpdatePageComponent implements OnInit {
           id: customer.id,
           name: customer.name,
           customer_id: customer.customer_id,
+          customer_txt: customer.customer_rel.name,
           description: customer.description,
           email: customer.email,
           created_date: customer.created_date,
@@ -168,16 +168,22 @@ export class CustomerUpdatePageComponent implements OnInit {
   }
 
   onClickSelectCustomer(customer: Customer) {
-    console.log(
-      "CustomerUpdatePageComponent onClickSelectCustomer()",
-      customer
-    );
+    // console.log(
+    //   "CustomerUpdatePageComponent onClickSelectCustomer()",
+    //   customer
+    // );
 
     this.store$.dispatch(
       new SetValueAction("customerForm.customer_id", customer.id)
     );
     this.store$.dispatch(new MarkAsDirtyAction("customerForm.customer_id"));
-    this.selectedCustomerIdOnDialog = customer;
+
+    this.store$.dispatch(
+      new SetValueAction("customerForm.customer_txt", customer.id)
+    );
+    this.store$.dispatch(new MarkAsDirtyAction("customerForm.customer_txt"));
+
+    //this.selectedCustomerIdOnDialog = customer;
 
     this.isShowingSelectCustomerDialog = false;
   }

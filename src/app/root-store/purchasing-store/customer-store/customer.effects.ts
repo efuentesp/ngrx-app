@@ -105,15 +105,15 @@ export class CustomerStoreEffects {
   @Effect()
   CreateNewRequestEffect$: Observable<Action> = this.actions$.pipe(
     ofType(CustomerActions.CustomerActionTypes.CreateNewRequest),
-    switchMap((action: CustomerActions.CreateNewRequest) =>
-      this.customerService.create(action.payload).pipe(
+    switchMap((action: CustomerActions.CreateNewRequest) => {
+      return this.customerService.create(action.payload).pipe(
         map((customer: Customer) => {
           return new CustomerActions.CreateNewSuccess(customer);
         }),
         tap(() => this.router.navigate(["/purchasing/customer/search"])),
         catchError(error => of(new CustomerActions.CreateNewFailure(error)))
-      )
-    )
+      );
+    })
   );
 
   @Effect()
