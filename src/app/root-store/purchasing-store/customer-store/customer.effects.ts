@@ -43,7 +43,7 @@ export class CustomerStoreEffects {
                 this.customerService
                   .findOne(customer.customer_id)
                   .subscribe((customer_id: Customer) => {
-                    customer.customer_rel = customer_id;
+                    //customer.customer_rel = customer_id;
                   });
               }
               return customer;
@@ -88,7 +88,7 @@ export class CustomerStoreEffects {
             this.customerService
               .findOne(customer.customer_id)
               .subscribe((customer_id: Customer) => {
-                customer.customer_rel = customer_id;
+                //customer.customer_rel = customer_id;
               });
           }
           //console.log(customer);

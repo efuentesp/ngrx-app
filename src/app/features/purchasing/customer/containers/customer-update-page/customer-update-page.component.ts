@@ -118,7 +118,7 @@ export class CustomerUpdatePageComponent implements OnInit {
           id: customer.id,
           name: customer.name,
           customer_id: customer.customer_id,
-          customer_txt: customer.customer_rel.name,
+          customer_txt: customer.customer_id,
           description: customer.description,
           email: customer.email,
           created_date: customer.created_date,
